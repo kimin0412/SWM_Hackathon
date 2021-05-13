@@ -61,7 +61,6 @@ export const Map = () => {
   }
 
   useEffect(() => {
-    getLocation()
   }, [])
 
   useEffect(() => map && locationArr.length && infoArr.length && createMarker(),
@@ -73,8 +72,8 @@ export const Map = () => {
     //Event listener for bounds change
     kakao.maps.event.addListener(map, "bounds_changed", () => {
       dispatch(setBounds(map.getBounds()))
-    }
-    );
+    });
+    getLocation()
   }, [map]);
 
   const getHCode = function (position) {
