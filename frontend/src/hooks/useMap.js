@@ -7,7 +7,7 @@ export default function useMap() {
   useEffect(() => {
     const script = document.createElement("script");
 
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c31d5ee15ff482a2db83f63b7cb22f6&autoload=false&libraries=services`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP}&autoload=false&libraries=services`;;
     script.async = true;
 
     document.head.appendChild(script);

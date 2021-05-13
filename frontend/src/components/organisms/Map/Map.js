@@ -3,7 +3,6 @@ import useMap from "../../../hooks/useMap";
 import { useSelector, useDispatch } from "react-redux";
 import { setBounds } from "../../../store/parks";
 import axios from 'axios';
-import https from 'https';
 // 모달
 import swal from "@sweetalert/with-react";
 import { SpotModal } from "../Map";
@@ -29,6 +28,8 @@ export const Map = () => {
       { mapX: 127.036719, mapY: 37.500054 },
       { mapX: 127.038356, mapY: 37.500338 },
       getGeolocation()
+        
+      
     ])
   }
 
@@ -106,13 +107,17 @@ export const Map = () => {
     //Event listener for bounds change
     kakao.maps.event.addListener(map, "bounds_changed", () => {
       dispatch(setBounds(map.getBounds()))
-      console.log(map.getBounds())
+      
     }
     );
 
     getLocation()
+      
+    
   }, [map]);
 
+    
+// position 좌표 객체를 받아서 weather, kmaList 를 추가해서 반환합니다.
   const getHCode = function (position) {
     var geocoder = new kakao.maps.services.Geocoder();
     var code;
@@ -121,22 +126,11 @@ export const Map = () => {
       if (status === kakao.maps.services.Status.OK) {
         position.tmp = 20;
         position.pop = 0;
-        //                     const agent = new https.Agent({
-        //                       rejectUnauthorized: false
-        //                     });
+          
+        axios.get('/api/weather?zone=' + result[1].code)
+        .then((Response) => {console.log(Response.data); position.weather = Response.kmaList.wfKor})
+        .catch((Error) => {console.log(Error)})
 
-        // axios.get('http://15.165.135.86:8080/api/weather?zone=' + result[1].code, {httpsAgent: agent })
-        // .then((Response) => {console.log(Response.data); position.weather = Response.kmaList.wfKor})
-        // .catch((Error) => {console.log(Error)})
-
-        // At instance level
-        // const instance = axios.create({
-        //   httpsAgent: new https.Agent({
-        //     rejectUnauthorized: false
-        //   })
-        // });
-
-        // instance.get('http://15.165.135.86:8080/api/weather?zone=' + result[1].code);
       } else {
       }
     };
