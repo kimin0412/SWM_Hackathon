@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import useMap from "../../../hooks/useMap";
 import { useDispatch } from "react-redux";
@@ -13,7 +14,7 @@ let nowPlace = {
 };
 
 /* global kakao */
-export const Map = () => {
+export const Map = ({ mobile }) => {
   const map = useMap();
   const [markerArr, setMarkerArr] = useState([]);
   const [locationArr, setLocationArr] = useState([]);
@@ -47,6 +48,7 @@ export const Map = () => {
         nowPlace.mapX = position.coords.longitude;
         nowPlace.mapY = position.coords.latitude;
 
+
         map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
       });
     } else {
@@ -79,6 +81,7 @@ export const Map = () => {
     getLocation();
   }, [map]);
 
+  
   const getHCode = function (position) {
     var geocoder = new kakao.maps.services.Geocoder();
     var code;
@@ -112,16 +115,17 @@ export const Map = () => {
     return position;
   };
 
+  const height = mobile ? '60vh' : '90vh';
   return (
     <div
       id="map"
-      className="site-layout-background"
+      className="kakaomap"
       style={{
-        padding: 24,
-        minHeight: 360,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: height,
       }}
     >
       Kakao MAP API

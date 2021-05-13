@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import * as filterSlice from "../../../store/filter/filter";
-import { Menu, Space, Switch, Slider } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { BiCctv } from "react-icons/bi";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as filterSlice from '../../../store/filter/filter';
+import { Menu, Space, Switch, Slider } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { BiCctv } from 'react-icons/bi';
 
 export default function CCTVFilter({ key, ...props }) {
   const cctv = useSelector((state) => state.filter.cctv);
@@ -12,6 +12,7 @@ export default function CCTVFilter({ key, ...props }) {
   const dispatch = useDispatch();
 
   return (
+    // <Menu theme="dark" mode="inline" style={{ width: '100%' }}>
     <Menu.SubMenu icon={<BiCctv />} title="CCTV" key={key} {...props}>
       <Menu.Item key="1" className="unselectable">
         <Space>
@@ -40,5 +41,6 @@ export default function CCTVFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
     </Menu.SubMenu>
+    //</Menu>
   );
 }
