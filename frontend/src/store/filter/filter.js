@@ -18,8 +18,8 @@ export const filterSlice = createSlice({
     sun: true,
     rain: true,
     snow: true,
-    temperature: 21,
-    precipitation: 5,
+    temperature: [7, 21],
+    precipitation: 40,
     humidity: 50,
   },
   reducers: {
