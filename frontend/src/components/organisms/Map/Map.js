@@ -33,7 +33,7 @@ export const Map = ({ mobile }) => {
   const [infoArr, setInfoArr] = useState([]);
   const cctvList = useCCTV();
   const lightsList = useLights();
-  const parksList = useFilter();
+  const parksList = useFilter(markerArr,map);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -77,26 +77,29 @@ export const Map = ({ mobile }) => {
           let arr = parkMarked
           arr[element.id] = true;
           setParkMarked([...arr])
-          setMarkerN(markerN + 1);
-          setMarkerArr([...markerArr + makeMarker(element, map)])
+          // setMarkerN(markerN + 1);
+          const marker = makeMarker(element, map);
+          setMarkerArr((prev)=>{
+            prev[element.id] = marker;
+            return prev;
+          })
         }
       });
     } catch (e) {
       console.log(e);
     }
-    console.log(markerArr.length, markerN)
   }, [parksList]);
 
-  useEffect(() => {
-    if (100 < markerN) {
-      console.log('flush!!!!')
-      markerArr.forEach((element) => {
-        element.setMap(null);
-      })
-      setParkMarked(Array(PARKMAX))
-      setMarkerArr([])
-    }
-  }, [markerN])
+  // useEffect(() => {
+  //   if (100 < markerN) {
+  //     console.log('flush!!!!')
+  //     markerArr.forEach((element) => {
+  //       element.setMap(null);
+  //     })
+  //     setParkMarked(Array(PARKMAX))
+  //     setMarkerArr([])
+  //   }
+  // }, [markerN])
 
   useEffect(
     () => map && locationArr.length && infoArr.length
