@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // 모달
 import swal from '@sweetalert/with-react';
 import { SpotModal } from '.';
+import { GiBurningRoundShot } from 'react-icons/gi';
 
 // 마커 설정 : 기본위치-소마센터
 let nowPlace = {
@@ -14,6 +15,7 @@ export const HeeMap = () => {
     const [map, setMap] = useState(null)
     const [markerArr, setMarkerArr] = useState([])
     const [locationArr, setLocationArr] = useState([])
+    const [mapBound, setMapBound] = useState([])
 
     const getLocation = () => {
         setLocationArr([
@@ -38,8 +40,23 @@ export const HeeMap = () => {
                 }
                 const createdMap = new kakao.maps.Map(container, options)
                 setMap(createdMap)
+                kakao.maps.event.addListener(map, 'tilesloaded', function () {
+                    var bounds = map.getBounds();
+                    var level = map.getLevel();
+
+                    let myPosition = {
+                        x1: bounds.ha, // 왼쪽 하단 위도
+                        y1: bounds.qa, // 왼쪽 하단 경도
+                        x2: bounds.oa, // 오른쪽 상단 위도
+                        y2: bounds.pa, // 오른쪽 상단 경도
+                    }
+                    setMapBound(myPosition)
+                    console.log(myPosition);
+                });
+
             })
         }
+
     }
 
     const createMarker = () => {
@@ -57,13 +74,19 @@ export const HeeMap = () => {
                 content: `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
                 removable: true,
             });
-            kakao.maps.event.addListener(mkr, 'click', () =>
-                info.open(map, mkr)
-            );
+            kakao.maps.event.addListener(mkr, 'mouseover', function () {
+                // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                info.open(map, mkr);
+            });
             kakao.maps.event.addListener(mkr, 'mouseout', function () {
                 // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
                 info.close();
             });
+            kakao.maps.event.addListener(mkr, 'click', () => {
+                swal(
+                    <SpotModal />
+                );
+            })
         })
         setMarkerArr(tempArr)
     }
@@ -78,6 +101,24 @@ export const HeeMap = () => {
             map,
             locationArr,
         ])
+
+    useEffect(() => {
+        console.log(mapBound)
+    }, [mapBound])
+
+    useEffect(() => {
+        if (map) {
+            let bounds = map.getBounds()
+            let myPosition = {
+                x1: bounds.ha, // 왼쪽 하단 위도
+                y1: bounds.qa, // 왼쪽 하단 경도
+                x2: bounds.oa, // 오른쪽 상단 위도
+                y2: bounds.pa, // 오른쪽 상단 경도
+            }
+            console.log(bounds)
+            setMapBound(myPosition)
+        }
+    }, [map])
 
     return (
         <div id='myMap' style={{
