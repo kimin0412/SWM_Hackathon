@@ -13,7 +13,7 @@ export default function makeMarker(data, map) {
   });
   const safety_idx = Math.round(data.safety_idx * 100) / 100;
   const info = new kakao.maps.InfoWindow({
-    content: `<div><h2>${data.park_name}</h2><p>안전점수 ${safety_idx}</p><p>CCTV 수 ${data.cctv_cnt}</p><p>가로등 수 ${data.streetlamp}</p></div>`,
+    content: `<div style= "font: bold; padding:5px; font-size: 10px"><h2>${data.park_name}</h2><p>안전점수 ${safety_idx}</p><p>CCTV 수 ${data.cctv_cnt}</p><p>가로등 수 ${data.streetlamp}</p></div>`,
     removable: true,
   });
   kakao.maps.event.addListener(marker, 'mouseover', function () {
