@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as filterSlice from "../../../store/filter/filter";
 import { Menu, Space, Switch, Slider } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { BiCctv } from "react-icons/bi";
 
 export default function CCTVFilter({ key, ...props }) {
-  const [apply, setApply] = useState(false);
-  const [camera, setCamera] = useState(3);
+  const cctv = useSelector((state) => state.filter.cctv);
+  const nearby = useSelector((state) => state.filter.nearbyCCTV);
+
+  const dispatch = useDispatch();
 
   return (
     <Menu.SubMenu icon={<BiCctv />} title="CCTV" key={key} {...props}>
@@ -15,23 +19,23 @@ export default function CCTVFilter({ key, ...props }) {
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
-            checked={apply}
+            checked={cctv}
             onChange={(checked, event) => {
               event.preventDefault();
-              setApply(checked);
+              dispatch(filterSlice.applyCCTV());
             }}
           />
         </Space>
       </Menu.Item>
 
-      <Menu.ItemGroup key="g1" title={`Nearby CCTV (${camera})`}>
+      <Menu.ItemGroup key="g1" title={`Nearby CCTV (${nearby})`}>
         <Menu.Item key="1" className="unselectable">
           <Slider
             min={0}
             max={10}
-            value={camera}
-            onChange={(value) => setCamera(value)}
-            disabled={!apply}
+            value={nearby}
+            onChange={(value) => dispatch(filterSlice.setNearbyCCTV(value))}
+            disabled={!cctv}
           />
         </Menu.Item>
       </Menu.ItemGroup>

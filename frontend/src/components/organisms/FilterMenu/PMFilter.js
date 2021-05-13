@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as filterSlice from "../../../store/filter/filter";
 import { Menu, Space, Switch, Slider } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { GiDustCloud } from "react-icons/gi";
 
 export default function PMFilter({ key, ...props }) {
-  const [apply, setApply] = useState(false);
+  const air = useSelector((state) => state.filter.air);
 
-  const [totalIndex, setTotalIndex] = useState(50);
-  const [pm10, setPm10] = useState(50);
-  const [pm25, setPm25] = useState(50);
+  const aqi = useSelector((state) => state.filter.aqi);
+  const pm10 = useSelector((state) => state.filter.pm10);
+  const pm25 = useSelector((state) => state.filter.pm25);
+
+  const dispatch = useDispatch();
 
   return (
     <Menu.SubMenu
@@ -23,23 +27,23 @@ export default function PMFilter({ key, ...props }) {
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
-            checked={apply}
+            checked={air}
             onChange={(checked, event) => {
               event.preventDefault();
-              setApply(checked);
+              dispatch(filterSlice.applyAir());
             }}
           />
         </Space>
       </Menu.Item>
 
-      <Menu.ItemGroup key="g1" title={`Air Quality Index (${totalIndex})`}>
+      <Menu.ItemGroup key="g1" title={`Air Quality Index (${aqi})`}>
         <Menu.Item key="1" className="unselectable">
           <Slider
             min={0}
             max={500}
-            value={totalIndex}
-            onChange={(value) => setTotalIndex(value)}
-            disabled={!apply}
+            value={aqi}
+            onChange={(value) => dispatch(filterSlice.setAQI(value))}
+            disabled={!air}
           />
         </Menu.Item>
       </Menu.ItemGroup>
@@ -50,8 +54,8 @@ export default function PMFilter({ key, ...props }) {
             min={0}
             max={100}
             value={pm10}
-            onChange={(value) => setPm10(value)}
-            disabled={!apply}
+            onChange={(value) => dispatch(filterSlice.setPm10(value))}
+            disabled={!air}
           />
         </Menu.Item>
       </Menu.ItemGroup>
@@ -62,8 +66,8 @@ export default function PMFilter({ key, ...props }) {
             min={0}
             max={100}
             value={pm25}
-            onChange={(value) => setPm25(value)}
-            disabled={!apply}
+            onChange={(value) => dispatch(filterSlice.setPm25(value))}
+            disabled={!air}
           />
         </Menu.Item>
       </Menu.ItemGroup>

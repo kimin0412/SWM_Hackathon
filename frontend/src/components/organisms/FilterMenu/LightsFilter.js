@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as filterSlice from "../../../store/filter/filter";
 import { Menu, Switch, Space, Slider } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { GiStreetLight } from "react-icons/gi";
 
 export default function LightsFilter({ key, ...props }) {
-  const [apply, setApply] = useState(false);
-  const [light, setLight] = useState(3);
+  const light = useSelector((state) => state.filter.light);
+  const nearby = useSelector((state) => state.filter.nearbyLight);
+
+  const dispatch = useDispatch();
 
   return (
     <Menu.SubMenu
@@ -20,23 +24,23 @@ export default function LightsFilter({ key, ...props }) {
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
-            checked={apply}
+            checked={light}
             onChange={(checked, event) => {
               event.preventDefault();
-              setApply(checked);
+              dispatch(filterSlice.applyLight());
             }}
           />
         </Space>
       </Menu.Item>
 
-      <Menu.ItemGroup key="g1" title={`Nearby Lights (${light})`}>
+      <Menu.ItemGroup key="g1" title={`Nearby Lights (${nearby})`}>
         <Menu.Item key="1" className="unselectable">
           <Slider
             min={0}
             max={10}
-            value={light}
-            onChange={(value) => setLight(value)}
-            disabled={!apply}
+            value={nearby}
+            onChange={(value) => dispatch(filterSlice.setNearybyLight(value))}
+            disabled={!light}
           />
         </Menu.Item>
       </Menu.ItemGroup>

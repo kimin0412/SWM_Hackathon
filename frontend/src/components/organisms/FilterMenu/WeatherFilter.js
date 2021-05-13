@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as filterSlice from "../../../store/filter/filter";
 import { Menu, Space, Switch, Slider, Button } from "antd";
 import {
   TiWeatherPartlySunny,
@@ -9,17 +11,19 @@ import {
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 export default function WeatherFilter({ key, ...props }) {
-  const [apply, setApply] = useState(false);
+  const climate = useSelector((state) => state.filter.climate);
 
-  const [sun, setSun] = useState(true);
-  const [rain, setRain] = useState(true);
-  const [snow, setSnow] = useState(true);
+  const sun = useSelector((state) => state.filter.sun);
+  const rain = useSelector((state) => state.filter.rain);
+  const snow = useSelector((state) => state.filter.snow);
 
-  const [temperature, setTemperature] = useState(21);
-  const [humidity, setHumidity] = useState(50);
-  const [precipitation, setPrecipitation] = useState(5);
+  const temperature = useSelector((state) => state.filter.temperature);
+  const humidity = useSelector((state) => state.filter.humidity);
+  const precipitation = useSelector((state) => state.filter.precipitation);
 
-  const buttonType = (state) => (state ? "primary" : "link");
+  const dispatch = useDispatch();
+
+  const buttonType = (apply) => (apply ? "primary" : "link");
 
   return (
     <Menu.SubMenu
@@ -34,10 +38,10 @@ export default function WeatherFilter({ key, ...props }) {
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
-            checked={apply}
+            checked={climate}
             onChange={(checked, event) => {
               event.preventDefault();
-              setApply(checked);
+              dispatch(filterSlice.applyClimate());
             }}
           />
         </Space>
@@ -49,20 +53,20 @@ export default function WeatherFilter({ key, ...props }) {
             <Button
               icon={<TiWeatherSunny />}
               type={buttonType(sun)}
-              onClick={() => setSun(!sun)}
-              disabled={!apply}
+              onClick={() => dispatch(filterSlice.setSun())}
+              disabled={!climate}
             />
             <Button
               icon={<TiWeatherDownpour />}
               type={buttonType(rain)}
-              onClick={() => setRain(!rain)}
-              disabled={!apply}
+              onClick={() => dispatch(filterSlice.setRain())}
+              disabled={!climate}
             />
             <Button
               icon={<TiWeatherSnow />}
               type={buttonType(snow)}
-              onClick={() => setSnow(!snow)}
-              disabled={!apply}
+              onClick={() => dispatch(filterSlice.setSnow())}
+              disabled={!climate}
             />
           </Space>
         </Menu.Item>
@@ -74,8 +78,8 @@ export default function WeatherFilter({ key, ...props }) {
             min={-10}
             max={40}
             value={temperature}
-            onChange={(value) => setTemperature(value)}
-            disabled={!apply}
+            onChange={(value) => dispatch(filterSlice.setTemperature(value))}
+            disabled={!climate}
           />
         </Menu.Item>
       </Menu.ItemGroup>
@@ -86,8 +90,8 @@ export default function WeatherFilter({ key, ...props }) {
             min={0}
             max={100}
             value={precipitation}
-            onChange={(value) => setPrecipitation(value)}
-            disabled={!apply || (!snow && !rain)}
+            onChange={(value) => dispatch(filterSlice.setPrecipitation(value))}
+            disabled={!climate || (!snow && !rain)}
           />
         </Menu.Item>
       </Menu.ItemGroup>
@@ -98,8 +102,8 @@ export default function WeatherFilter({ key, ...props }) {
             min={0}
             max={100}
             value={humidity}
-            onChange={(value) => setHumidity(value)}
-            disabled={!apply}
+            onChange={(value) => dispatch(filterSlice.setHumidity(value))}
+            disabled={!climate}
           />
         </Menu.Item>
       </Menu.ItemGroup>
