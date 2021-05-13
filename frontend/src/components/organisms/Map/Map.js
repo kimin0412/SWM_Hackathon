@@ -5,6 +5,7 @@ import { setBounds } from "../../../store/parks";
 
 import useCCTV from "../../../hooks/useCCTV";
 import createMarkers from "../../../hooks/createMarkers";
+import createCCTVMarker from "../../../hooks/createCCTVMarker";
 
 // 마커 설정 : 기본위치-소마센터
 let nowPlace = {
@@ -20,10 +21,6 @@ export const Map = () => {
   const [infoArr, setInfoArr] = useState([]);
   const CCTVList = useCCTV();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(CCTVList);
-  }, [CCTVList]);
 
   const getLocation = () => {
     setLocationArr([
@@ -62,7 +59,20 @@ export const Map = () => {
     setMarkerArr(createMarkers(locationArr, infoArr, map));
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
+
+  useEffect(() => {
+    try {
+      CCTVList['data'].forEach(element => {
+        console.log(element)
+        createCCTVMarker(element, map)
+      });
+      console.log(CCTVList)
+    } catch (e) {
+      console.log(e)
+    }
+    console.log(CCTVList.data)
+  }, [CCTVList]);
 
   useEffect(
     () => map && locationArr.length && infoArr.length && createMarker(),
