@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function useCCTV() {
-  const [CCTVList, setCCTVList] = useState([]);
+  const [parksList, setParksList] = useState([]);
   const bounds = useSelector((state) => state.parks.bounds);
 
   const [wholeBounds, setWholeBounds] = useState(bounds);
@@ -44,14 +44,14 @@ export default function useCCTV() {
 
     axios({
       method: "GET",
-      url: `https://swm14-backend2-jakyk.run.goorm.io/api/cctv/${roundedBounds.qa}/${roundedBounds.ha}/${roundedBounds.pa}/${roundedBounds.oa}`,
+      url: `https://swm14-backend2-jakyk.run.goorm.io/api/park/${roundedBounds.qa}/${roundedBounds.ha}/${roundedBounds.pa}/${roundedBounds.oa}`,
     })
       .then((res) => res.data)
       .then((data) => {
-        setCCTVList(data);
+        setParksList(data);
       })
       .catch((err) => console.log(err));
   }, [wholeBounds]);
 
-  return CCTVList;
+  return parksList;
 }

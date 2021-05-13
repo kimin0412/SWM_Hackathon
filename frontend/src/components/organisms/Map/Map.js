@@ -5,6 +5,10 @@ import { useDispatch } from "react-redux";
 import { setBounds } from "../../../store/parks";
 
 import useCCTV from "../../../hooks/useCCTV";
+import useLights from "../../../hooks/useLights";
+import useFilter from "../../../hooks/useFilter";
+import usePakrs from "../../../hooks/useParks";
+
 import createMarkers from "../../../hooks/createMarkers";
 
 // 마커 설정 : 기본위치-소마센터
@@ -19,12 +23,14 @@ export const Map = ({ mobile }) => {
   const [markerArr, setMarkerArr] = useState([]);
   const [locationArr, setLocationArr] = useState([]);
   const [infoArr, setInfoArr] = useState([]);
-  const CCTVList = useCCTV();
+  const cctvList = useCCTV();
+  const lightsList = useLights();
+  const parksList = usePakrs();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(CCTVList);
-  }, [CCTVList]);
+    console.log(parksList, cctvList, lightsList);
+  }, [parksList, cctvList, lightsList]);
 
   const getLocation = () => {
     setLocationArr([

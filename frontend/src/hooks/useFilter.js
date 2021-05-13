@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import useParks from "./useParks";
 
 export default function useFilter() {
   const filterOptions = useSelector((state) => state.filter);
-  const parkList = useSelector((state) => state.parks.parkList);
+  const parkList = useParks();
   const bounds = useSelector((state) => state.parks.bounds);
 
   const [filteredPark, setFilteredPark] = useState(parkList);
