@@ -56,43 +56,12 @@ export const Map = () => {
     }
     return nowPlace
   }
-
-  // const createMarker = () => {
-  //   const { kakao } = window
-  //   const tempArr = []
-  //   locationArr.forEach(e => {
-  //     let mkr = new kakao.maps.Marker({
-  //       map: map,
-  //       position: new kakao.maps.LatLng(e.mapY, e.mapX),
-  //     })
-  //     tempArr.push(
-  //       mkr
-  //     )
-  //     const info = new kakao.maps.InfoWindow({
-  //       content: `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
-  //       removable: true,
-  //     });
-  //     kakao.maps.event.addListener(mkr, 'mouseover', function () {
-  //       info.open(map, mkr);
-  //     });
-  //     kakao.maps.event.addListener(mkr, 'mouseout', function () {
-  //       info.close();
-  //     });
-  //     kakao.maps.event.addListener(mkr, 'click', () => {
-  //       swal(
-  //         <SpotModal />
-  //       );
-  //     })
-  //   })
-  //   setMarkerArr(tempArr)
-  // }
   const createMarker = () => {
-    let out = createMarkers(locationArr, infoArr, map);
-    console.log(out)
-    setMarkerArr(out)
+    setMarkerArr(createMarkers(locationArr, infoArr, map))
   }
 
   useEffect(() => {
+    getLocation()
   }, [])
 
   useEffect(() => map && locationArr.length && infoArr.length && createMarker(),
@@ -100,19 +69,12 @@ export const Map = () => {
 
   useEffect(() => {
     if (map == null) return;
-    // map config
-    map.setDraggable(true);
-    var control = new kakao.maps.ZoomControl();
-    map.addControl(control, kakao.maps.ControlPosition.BOTTOMRIGHT);
-    map.setMaxLevel(5);
 
     //Event listener for bounds change
     kakao.maps.event.addListener(map, "bounds_changed", () => {
       dispatch(setBounds(map.getBounds()))
-      console.log(map.getBounds())
     }
     );
-    getLocation()
   }, [map]);
 
   const getHCode = function (position) {
