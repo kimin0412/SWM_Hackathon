@@ -15,6 +15,14 @@ const initialState = {
       location: "South Korea",
     },
   ],
+  cctvList: [
+    {
+      id: 1,
+      lat: 37.766,
+      lon: 137.66,
+      cnt: 1,
+    },
+  ],
 };
 
 const slice = createSlice({
@@ -23,6 +31,10 @@ const slice = createSlice({
   reducers: {
     setParkList: (state, action) => {
       state.parkList = action.payload;
+    },
+
+    setCCTVList: (state, action) => {
+      state.cctvList = action.payload;
     },
 
     setBounds: (state, action) => {
@@ -35,4 +47,4 @@ export default slice.reducer;
 
 // Actions
 
-export const { setParkList, setBounds } = slice.actions;
+export const { setCCTVList, setParkList, setBounds } = slice.actions;
