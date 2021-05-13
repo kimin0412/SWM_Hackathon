@@ -33,7 +33,7 @@ export const Map = ({ mobile }) => {
   const [infoArr, setInfoArr] = useState([]);
   const cctvList = useCCTV();
   const lightsList = useLights();
-  const parksList = useFilter(markerArr,map);
+  const parksList = useFilter(markerArr, map);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -48,20 +48,13 @@ export const Map = ({ mobile }) => {
     // 위치 정보가 사용이 가능하면
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        nowPlace.mapX = position.coords.longitude;
-        nowPlace.mapY = position.coords.latitude;
-
-        map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
+        nowPlace.x = position.coords.longitude;
+        nowPlace.y = position.coords.latitude;
 
         getHCode(nowPlace);
       });
-    } else {
-      // 기본 위치 설정
-      nowPlace = {
-        mapX: 127.0425755,
-        mapY: 37.503412,
-      };
     }
+    map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
     return nowPlace;
   };
   // const createMarker = () => {
@@ -79,7 +72,7 @@ export const Map = ({ mobile }) => {
           setParkMarked([...arr])
           // setMarkerN(markerN + 1);
           const marker = makeMarker(element, map);
-          setMarkerArr((prev)=>{
+          setMarkerArr((prev) => {
             prev[element.id] = marker;
             return prev;
           })
