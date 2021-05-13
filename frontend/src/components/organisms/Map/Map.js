@@ -14,6 +14,7 @@ import useFilter from "../../../hooks/useFilter";
 import usePakrs from "../../../hooks/useParks";
 
 import createMarkers from "../../../hooks/createMarkers";
+import makeMarker from "../../../hooks/makeMarker";
 
 
 // 마커 설정 : 기본위치-소마센터
@@ -78,7 +79,18 @@ export const Map = ({ mobile }) => {
   };
 
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
+
+  useEffect(() => {
+    try {
+      parksList['data'].forEach(element => {
+        console.log(element)
+        makeMarker(element, map)
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  }, [parksList]);
 
   useEffect(
     () => map && locationArr.length && infoArr.length && createMarker(),
@@ -105,10 +117,10 @@ export const Map = ({ mobile }) => {
       if (status === kakao.maps.services.Status.OK) {
         // position.tmp = 20;
         // position.pop = 0;
-          
+
         axios.get('/api/weather?zone=' + result[1].code)
-        .then((Response) => {console.log(Response.data); position.weather = Response.kmaList.wfKor})
-        .catch((Error) => {console.log(Error)})
+          .then((Response) => { console.log(Response.data); position.weather = Response.kmaList.wfKor })
+          .catch((Error) => { console.log(Error) })
 
       } else {
       }
