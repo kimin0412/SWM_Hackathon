@@ -22,6 +22,12 @@ export default function useMap() {
         };
 
         const map = new kakao.maps.Map(container, options);
+        // map config
+        map.setDraggable(true);
+        var control = new kakao.maps.ZoomControl();
+        map.addControl(control, kakao.maps.ControlPosition.BOTTOMRIGHT);
+        map.setMaxLevel(5);
+
         setMap(map);
       });
     };
