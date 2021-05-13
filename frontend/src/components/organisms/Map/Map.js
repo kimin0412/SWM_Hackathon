@@ -32,10 +32,6 @@ export const Map = ({ mobile }) => {
   const parksList = useFilter();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(parksList, cctvList, lightsList);
-  }, [parksList, cctvList, lightsList]);
-
   const getLocation = () => {
     setLocationArr([getGeolocation()]);
   };
@@ -68,9 +64,8 @@ export const Map = ({ mobile }) => {
 
   useEffect(() => {
     try {
-      parksList['data'].forEach((element) => {
-        console.log(element);
-        makeMarker(element, map);
+      parksList['data'].forEach(element => {
+        makeMarker(element, map)
       });
     } catch (e) {
       console.log(e);

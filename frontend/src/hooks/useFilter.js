@@ -27,6 +27,9 @@ export default function useFilter() {
         });
       }
     }
+
+    if (filterOptions.climate && "climate" in parkList.data[0]) {
+    }
   }, [filterOptions, parkList, bounds]);
 
   return {
