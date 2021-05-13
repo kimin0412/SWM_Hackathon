@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { Layout } from "antd";
+import Filter from "./components/Filter/Filter";
+import Map from "./components/Map/Map";
+
+const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Layout>
+      <Sider breakpoint="lg" collapsedWidth="0">
+        <div className="logo" />
+        <Filter />
+      </Sider>
+      <Layout>
+        <Header
+          className="site-layout-sub-header-background"
+          style={{ padding: 0, paddingLeft: 20 }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          SWM HACKATHON TEAM NAME
+        </Header>
+        <Content style={{ margin: "24px 16px 0" }}>
+          <Map />
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </Layout>
+    </Layout>
   );
 }
 
