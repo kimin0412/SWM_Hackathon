@@ -43,7 +43,7 @@ export const SpotModal = (props) => {
     labels: ['범죄 안전 점수', '코로나 안전 점수', '사용자 리뷰 점수'],
     datasets: [
       {
-        label: 'My First Dataset',
+        label: ' ',
         data: [safety_idx, 40, 70],
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -88,7 +88,7 @@ export const SpotModal = (props) => {
       <div style={{display:"flex"}}>
         <div style={{width:"33%"}}>
           <h3>가로등</h3>
-          <h1 className="score">{props.data.cctv_cnt}</h1>
+          <h1 className="score">{props.data.streetlamp}</h1>
         </div>
 
         <div style={{width:"33%"}}>
