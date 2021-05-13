@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from '@sweetalert/with-react';
 import './SpotModal.css';
-import { Bar, Radar } from "react-chartjs-2";
+import { Bar, Radar } from 'react-chartjs-2';
 
 export const SpotModal = () => {
   // // for chart
@@ -31,7 +31,7 @@ export const SpotModal = () => {
 
   // return (
   //     <div>
-  //         <h1 className="parkName">소마공원</h1>  
+  //         <h1 className="parkName">소마공원</h1>
   //         <h3>전체 점수</h3>
   //         <h1 className="score">95점</h1>
   //         <Bar data={bar_data} legend={legend}/>
@@ -39,36 +39,46 @@ export const SpotModal = () => {
   // );
 
   let data = {
-    labels: [
-      '범죄 안전 점수',
-      '코로나 안전 점수',
-      '사용자 리뷰 점수',
+    labels: ['범죄 안전 점수', '코로나 안전 점수', '사용자 리뷰 점수'],
+    datasets: [
+      {
+        label: 'My First Dataset',
+        data: [65, 40, 70],
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)',
+      },
     ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [65, 60, 60],
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(255, 99, 132)'
-    }]
   };
   const config = {
     type: 'radar',
     data: data,
+    scales: {
+      r: {
+        angleLines: {
+          display: false,
+        },
+        suggestedMin: 30,
+        suggestedMax: 90,
+        ticks: {
+          stepSize: 10,
+        },
+      },
+    },
     options: {
       elements: {
         line: {
-          borderWidth: 30
-        }
+          borderWidth: 30,
+        },
       },
       legend: {
         display: false,
-        position: 'bottom'
-      }
+        position: 'bottom',
+      },
     },
   };
   return (
@@ -79,4 +89,4 @@ export const SpotModal = () => {
       <Radar data={data} options={config} />
     </div>
   );
-}
+};
