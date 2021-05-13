@@ -103,8 +103,8 @@ export const Map = ({ mobile }) => {
 
     var callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        position.tmp = 20;
-        position.pop = 0;
+        // position.tmp = 20;
+        // position.pop = 0;
           
         axios.get('/api/weather?zone=' + result[1].code)
         .then((Response) => {console.log(Response.data); position.weather = Response.kmaList.wfKor})
