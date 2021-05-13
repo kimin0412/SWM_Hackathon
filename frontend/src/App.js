@@ -5,4 +5,8 @@ function App() {
   return <MainPage />;
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> frontend
