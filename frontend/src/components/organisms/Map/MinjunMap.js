@@ -15,7 +15,7 @@ export const MinjunMap = () => {
     useEffect(()=> {
         const script = document.createElement('script');
         
-        script.src =`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP}&autoload=false`;
+        script.src =`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAOMAP}&autoload=false&libraries=services`;
         script.async = true;
 
         document.head.appendChild(script);
@@ -104,7 +104,8 @@ export const MinjunMap = () => {
                 kakao.maps.event.addListener(map, 'tilesloaded', function() {
                     var bounds = map.getBounds();
                     var level = map.getLevel();
-                    var geocoder = new kakao.maps.services.Geocoder();
+                    
+                    
                     
 
                     let myPosition = {
@@ -115,20 +116,9 @@ export const MinjunMap = () => {
                     }
 
                     console.log(myPosition);
-                    
-                    
-                    var callback = function(result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-
-                            console.log('지역 명칭 : ' + result[0].address_name);
-                            console.log('행정구역 코드 : ' + result[0].code);
-                        }
-                    };
-
-                    geocoder.coord2RegionCode(126.9786567, 37.566826, callback);
-                    
-
-                });
+                    });
+                
+                getHCode(myPosition);
             });
         };
         
@@ -138,15 +128,37 @@ export const MinjunMap = () => {
     }, []);
 
 
-    function axiosTest(){
-        console.log('start');
-        axios.get('https://www.naver.com/')
-        .then((Response) => {console.log(Response.data)})
-        .catch((Error) => {console.log(Error)})
+    // function axiosTest(){
+    //     console.log('start');
+    //     axios.get('https://www.naver.com/')
+    //     .then((Response) => {console.log(Response.data)})
+    //     .catch((Error) => {console.log(Error)})
         
-    }
+    // }
 
     // axiosTest();
+    
+    function getHCode(position){
+        var geocoder = new kakao.maps.services.Geocoder();
+        var code;
+        
+        var callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+
+                    console.log(result[0])
+                    console.log('지역 명칭 : ' + result[0].address_name);
+                    console.log('행정구역 코드 : ' + result[0].code);
+                
+                    code = result[0].code;
+                }
+            };
+
+        geocoder.coord2RegionCode(position.x, position.y, callback);
+        
+        return code;
+        
+    }
+    
         return (
             <div id='myMap' style={{
                 padding: 24,
