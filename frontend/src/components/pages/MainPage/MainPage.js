@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 
-import { Filter } from '../../organisms/Filter';
+import { FilterMenu } from '../../organisms/FilterMenu';
 import { Map } from '../../organisms/Map';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -11,7 +11,7 @@ export const MainPage = () => {
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
         <div className="logo" />
-        <Filter />
+        <FilterMenu />
       </Sider>
       <Layout>
         <Header
