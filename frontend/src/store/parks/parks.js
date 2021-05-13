@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bounds: { ha: null, qa: null, oa: null, pa: null },
+  level: 7,
+
   parkList: [
     {
       id: 0,
@@ -28,10 +30,14 @@ const slice = createSlice({
     setBounds: (state, action) => {
       state.bounds = action.payload;
     },
+
+    setLevel: (state, action) => {
+      state.level = action.payload;
+    },
   },
 });
 
 export default slice.reducer;
 
 // Actions
-export const { setParkList, setBounds } = slice.actions;
+export const { setParkList, setBounds, setLevel } = slice.actions;

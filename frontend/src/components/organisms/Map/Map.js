@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setBounds } from "../../../store/parks";
+import { setBounds, setLevel } from "../../../store/parks";
 
 /* global kakao */
 export const Map = () => {
@@ -44,6 +44,11 @@ export const Map = () => {
         //Event listener for bounds change
         kakao.maps.event.addListener(map, "bounds_changed", () =>
           dispatch(setBounds(map.getBounds()))
+        );
+
+        //Event listener for level change
+        kakao.maps.event.addListener(map, "zoom_changed", () =>
+          dispatch(setLevel(map.getLevel()))
         );
       });
     };

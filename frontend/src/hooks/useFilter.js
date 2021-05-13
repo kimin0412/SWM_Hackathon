@@ -12,7 +12,7 @@ export default function useFilter() {
     if (filterOptions.light) {
       setFilteredPark((prevList) => {
         return prevList.filter(
-          (park) => park.streatlamp >= filterOptions.nearbyLight
+          (park) => park.streetlamp >= filterOptions.nearbyLight
         );
       });
     }
