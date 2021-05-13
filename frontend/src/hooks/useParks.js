@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 export default function usePark() {
-  const [parksList, setParksList] = useState([]);
+  const [parksList, setParksList] = useState({data:[]});
   const bounds = useSelector((state) => state.parks.bounds);
 
   const [wholeBounds, setWholeBounds] = useState(bounds);

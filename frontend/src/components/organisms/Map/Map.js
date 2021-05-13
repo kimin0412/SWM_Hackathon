@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useMap from '../../../hooks/useMap';
 import { useDispatch } from 'react-redux';
-import { setBounds } from '../../../store/parks';
+import { setBounds, setParkList } from '../../../store/parks';
 import axios from 'axios';
 // 모달
 // import swal from '@sweetalert/with-react';
@@ -22,19 +22,23 @@ let nowPlace = {
 };
 
 /* global kakao */
+const PARKMAX = 17735
+
 export const Map = ({ mobile }) => {
   const map = useMap();
   const [markerArr, setMarkerArr] = useState([]);
+  const [parkMarked, setParkMarked] = useState(Array(PARKMAX))
+  const [markerN, setMarkerN] = useState(0)
   const [locationArr, setLocationArr] = useState([]);
   const [infoArr, setInfoArr] = useState([]);
   const cctvList = useCCTV();
   const lightsList = useLights();
-  const parksList = useFilter();
+  const parksList = useFilter(markerArr,map);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(parksList, cctvList, lightsList);
-  }, [parksList, cctvList, lightsList]);
+  // useEffect(() => {
+  //   console.log(parksList, cctvList, lightsList);
+  // }, [parksList, cctvList, lightsList]);
 
   const getLocation = () => {
     setLocationArr([getGeolocation()]);
@@ -60,25 +64,46 @@ export const Map = ({ mobile }) => {
     }
     return nowPlace;
   };
-  const createMarker = () => {
-    setMarkerArr(createMarkers(locationArr, infoArr, map));
-  };
+  // const createMarker = () => {
+  //   setMarkerArr(createMarkers(locationArr, infoArr, map));
+  // };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   useEffect(() => {
     try {
       parksList['data'].forEach((element) => {
-        console.log(element);
-        makeMarker(element, map);
+        if (!parkMarked[element.id]) {
+          let arr = parkMarked
+          arr[element.id] = true;
+          setParkMarked([...arr])
+          // setMarkerN(markerN + 1);
+          const marker = makeMarker(element, map);
+          setMarkerArr((prev)=>{
+            prev[element.id] = marker;
+            return prev;
+          })
+        }
       });
     } catch (e) {
       console.log(e);
     }
   }, [parksList]);
 
+  // useEffect(() => {
+  //   if (100 < markerN) {
+  //     console.log('flush!!!!')
+  //     markerArr.forEach((element) => {
+  //       element.setMap(null);
+  //     })
+  //     setParkMarked(Array(PARKMAX))
+  //     setMarkerArr([])
+  //   }
+  // }, [markerN])
+
   useEffect(
-    () => map && locationArr.length && infoArr.length && createMarker(),
+    () => map && locationArr.length && infoArr.length
+    // && createMarker(),
     [map, locationArr, infoArr]
   );
 
@@ -103,7 +128,7 @@ export const Map = ({ mobile }) => {
         axios
           .get('/api/weather?zone=' + result[1].code)
           .then((Response) => {
-            console.log(Response.data);
+            // console.log(Response.data);
             position.weather = Response.kmaList.wfKor;
           })
           .catch((Error) => {
