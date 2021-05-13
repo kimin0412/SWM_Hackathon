@@ -1,21 +1,19 @@
-
-import React, { useEffect, useState } from "react";
-import useMap from "../../../hooks/useMap";
-import { useDispatch } from "react-redux";
-import { setBounds } from "../../../store/parks";
+import React, { useEffect, useState } from 'react';
+import useMap from '../../../hooks/useMap';
+import { useDispatch } from 'react-redux';
+import { setBounds } from '../../../store/parks';
 import axios from 'axios';
 // 모달
-import swal from "@sweetalert/with-react";
-import { SpotModal } from "../Map";
-import useMarker from "../../../hooks/useMarker";
-import useCCTV from "../../../hooks/useCCTV";
-import useLights from "../../../hooks/useLights";
-import useFilter from "../../../hooks/useFilter";
-import usePakrs from "../../../hooks/useParks";
+import swal from '@sweetalert/with-react';
+import { SpotModal } from '../Map';
+import useMarker from '../../../hooks/useMarker';
+import useCCTV from '../../../hooks/useCCTV';
+import useLights from '../../../hooks/useLights';
+import useFilter from '../../../hooks/useFilter';
+import usePakrs from '../../../hooks/useParks';
 
-import createMarkers from "../../../hooks/createMarkers";
-import makeMarker from "../../../hooks/makeMarker";
-
+import createMarkers from '../../../hooks/createMarkers';
+import makeMarker from '../../../hooks/makeMarker';
 
 // 마커 설정 : 기본위치-소마센터
 let nowPlace = {
@@ -39,24 +37,19 @@ export const Map = ({ mobile }) => {
   }, [parksList, cctvList, lightsList]);
 
   const getLocation = () => {
-    setLocationArr([
-      getGeolocation()
-    ]);
+    setLocationArr([getGeolocation()]);
   };
-
 
   const getGeolocation = () => {
     // 위치 정보가 사용이 가능하면
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         nowPlace.mapX = position.coords.longitude;
         nowPlace.mapY = position.coords.latitude;
 
-
         map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
-         
-        getHCode(nowPlace);
 
+        getHCode(nowPlace);
       });
     } else {
       // 기본 위치 설정
@@ -71,17 +64,16 @@ export const Map = ({ mobile }) => {
     setMarkerArr(createMarkers(locationArr, infoArr, map));
   };
 
-
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     try {
-      parksList['data'].forEach(element => {
-        console.log(element)
-        makeMarker(element, map)
+      parksList['data'].forEach((element) => {
+        console.log(element);
+        makeMarker(element, map);
       });
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }, [parksList]);
 
@@ -90,18 +82,14 @@ export const Map = ({ mobile }) => {
     [map, locationArr, infoArr]
   );
 
-
   useEffect(() => {
     if (map == null) return;
 
     //Event listener for bounds change
-    kakao.maps.event.addListener(map, "bounds_changed", () => {
-
+    kakao.maps.event.addListener(map, 'bounds_changed', () => {
       dispatch(setBounds(map.getBounds()));
     });
     getLocation();
-    
-    
   }, [map]);
 
   const getHCode = function (position) {
@@ -113,10 +101,15 @@ export const Map = ({ mobile }) => {
         // position.tmp = 20;
         // position.pop = 0;
 
-        axios.get('/api/weather?zone=' + result[1].code)
-          .then((Response) => { console.log(Response.data); position.weather = Response.kmaList.wfKor })
-          .catch((Error) => { console.log(Error) })
-
+        axios
+          .get('/api/weather?zone=' + result[1].code)
+          .then((Response) => {
+            console.log(Response.data);
+            position.weather = Response.kmaList.wfKor;
+          })
+          .catch((Error) => {
+            console.log(Error);
+          });
       } else {
       }
     };
@@ -126,7 +119,7 @@ export const Map = ({ mobile }) => {
     return position;
   };
 
-  const height = mobile ? '60vh' : '90vh';
+  const height = mobile ? '60vh' : '75vh';
   return (
     <div
       id="map"

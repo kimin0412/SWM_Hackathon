@@ -5,7 +5,6 @@ import { FilterMenu } from '../../organisms/FilterMenu';
 import { Map } from '../../organisms/Map';
 const { Header, Sider, Content } = Layout;
 
-
 export const MainPage = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -38,7 +37,7 @@ export const MainPage = () => {
         >
           <FilterMenu mobile={false} />
         </Sider>
-        <Content style={{ margin: '1.5vh 20px', overflow: 'initial' }}>
+        <Content style={{ margin: '3vh 30px 15vh', overflow: 'initial' }}>
           <Map mobile={false} />
         </Content>
       </Layout>
