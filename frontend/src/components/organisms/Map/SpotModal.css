@@ -13,3 +13,30 @@
     padding-left:10px;
     padding-right:10px;
 }
+
+.score{
+    font-size: 50px;
+    font-family: 'SDSamliphopangche_Outline'
+}
+
+.parkName{
+    font-size: 60px;
+    font-family: 'Cafe24Ohsquare'
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

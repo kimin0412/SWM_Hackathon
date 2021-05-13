@@ -63,6 +63,9 @@ export const Map = ({ mobile }) => {
 
 
         map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
+         
+        getHCode(nowPlace);
+
       });
     } else {
       // 기본 위치 설정
@@ -95,6 +98,8 @@ export const Map = ({ mobile }) => {
       dispatch(setBounds(map.getBounds()));
     });
     getLocation();
+    
+    
   }, [map]);
 
   const getHCode = function (position) {
