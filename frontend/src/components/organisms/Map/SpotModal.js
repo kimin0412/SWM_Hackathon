@@ -1,6 +1,6 @@
 import React from 'react';
 import './SpotModal.css';
-import { Radar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 export const SpotModal = (props) => {
   const safety_idx = Math.round(props.data.safety_idx * 100) / 100;
@@ -40,13 +40,16 @@ export const SpotModal = (props) => {
   // );
 
   let data = {
-    labels: ['범죄 안전 점수', '코로나 안전 점수', '사용자 리뷰 점수'],
+    labels: [],
     datasets: [
       {
         label: ' ',
-        data: [safety_idx, 40, 70],
+        data: [safety_idx, 15-safety_idx],
         fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 255, 255, 0)'
+        ],
         borderColor: 'rgb(255, 99, 132)',
         pointBackgroundColor: 'rgb(255, 99, 132)',
         pointBorderColor: '#fff',
@@ -55,33 +58,20 @@ export const SpotModal = (props) => {
       },
     ],
   };
+  
   const config = {
-    type: 'radar',
-    data: data,
-    scales: {
-      r: {
-        angleLines: {
-          display: false,
-        },
-        suggestedMin: 30,
-        suggestedMax: 90,
-        ticks: {
-          stepSize: 10,
-        },
+      type: 'doughnut',
+      data: data,
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            enabled: true,
+          },
+        }
       },
-    },
-    options: {
-      elements: {
-        line: {
-          borderWidth: 30,
-        },
-      },
-      legend: {
-        display: false,
-        position: 'bottom',
-      },
-    },
-  };
+    };
+    
   return (
     <div>
       <h1 className="parkName">{props.data.park_name}</h1>
@@ -101,13 +91,12 @@ export const SpotModal = (props) => {
           <h1 className="score">{area}</h1>
         </div>
       </div>
-      <h1>↓</h1>
       <div>
         <h3>범죄 안전 점수</h3>
         <h1 className="score">{safety_idx}점</h1>
       </div>
-      <div style={{height:"350px"}}>
-      <Radar data={data} options={config} />
+      <div>
+      <Doughnut className="texts" data={data} options={config} />
       </div>
     </div>
   );
