@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  parkList: [],
-};
-
-const slice = createSlice({
-  name: 'parks',
-  initialState,
-  reducers: {},
-=======
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -41,14 +29,10 @@ const slice = createSlice({
       state.bounds = action.payload;
     },
   },
->>>>>>> frontend
 });
 
 export default slice.reducer;
 
 // Actions
-<<<<<<< HEAD
-export const {} = slice.actions;
-=======
+
 export const { setParkList, setBounds } = slice.actions;
->>>>>>> frontend
