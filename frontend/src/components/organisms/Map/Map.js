@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import { setBounds } from '../../../store/parks';
 import axios from 'axios';
 // 모달
-import swal from '@sweetalert/with-react';
-import { SpotModal } from '../Map';
-import useMarker from '../../../hooks/useMarker';
+// import swal from '@sweetalert/with-react';
+// import { SpotModal } from '../Map';
+// import useMarker from '../../../hooks/useMarker';
 import useCCTV from '../../../hooks/useCCTV';
 import useLights from '../../../hooks/useLights';
 import useFilter from '../../../hooks/useFilter';
-import usePakrs from '../../../hooks/useParks';
+// import usePakrs from '../../../hooks/useParks';
 
 import createMarkers from '../../../hooks/createMarkers';
 import makeMarker from '../../../hooks/makeMarker';
@@ -75,7 +75,7 @@ export const Map = ({ mobile }) => {
     } catch (e) {
       console.log(e);
     }
-  }, [parksList]);
+  }, [parksList, makeMarker]);
 
   useEffect(
     () => map && locationArr.length && infoArr.length && createMarker(),
@@ -90,11 +90,10 @@ export const Map = ({ mobile }) => {
       dispatch(setBounds(map.getBounds()));
     });
     getLocation();
-  }, [map]);
+  }, [map, dispatch, getLocation]);
 
   const getHCode = function (position) {
     var geocoder = new kakao.maps.services.Geocoder();
-    var code;
 
     var callback = function (result, status) {
       if (status === kakao.maps.services.Status.OK) {

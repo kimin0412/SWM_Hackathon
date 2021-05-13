@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import useParks from "./useParks";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import useParks from './useParks';
 
 export default function useFilter() {
   const filterOptions = useSelector((state) => state.filter);

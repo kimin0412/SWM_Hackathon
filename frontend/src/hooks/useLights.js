@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export default function useCCTV() {
   const [lightsList, setLightsList] = useState([]);
@@ -43,7 +43,7 @@ export default function useCCTV() {
     }
 
     axios({
-      method: "GET",
+      method: 'GET',
       url: `https://swm14-backend2-jakyk.run.goorm.io/api/streetlamp/${roundedBounds.qa}/${roundedBounds.ha}/${roundedBounds.pa}/${roundedBounds.oa}`,
     })
       .then((res) => res.data)

@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   bounds: { ha: null, qa: null, oa: null, pa: null },
 };
 
 const slice = createSlice({
-  name: "parks",
+  name: 'parks',
   initialState,
   reducers: {
     setBounds: (state, action) => {

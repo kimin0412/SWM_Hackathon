@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /* global kakao */
 export default function useMap() {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
 
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=5f144011a4f7c4087bac303028be7fb5&autoload=false&libraries=services`;;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=5f144011a4f7c4087bac303028be7fb5&autoload=false&libraries=services`;
     script.async = true;
 
     document.head.appendChild(script);
 
     script.onload = () => {
       kakao.maps.load(() => {
-        const container = document.getElementById("map");
+        const container = document.getElementById('map');
 
         const options = {
           center: new kakao.maps.LatLng(37.506502, 127.053617),

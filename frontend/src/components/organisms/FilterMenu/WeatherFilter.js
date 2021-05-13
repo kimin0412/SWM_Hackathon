@@ -73,7 +73,10 @@ export default function WeatherFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
 
-      <Menu.ItemGroup key="g2" title={`Temperature (${temperature[0]} ~ ${temperature[1]}°C)`}>
+      <Menu.ItemGroup
+        key="g2"
+        title={`Temperature (${temperature[0]} ~ ${temperature[1]}°C)`}
+      >
         <Menu.Item key="1" className="unselectable">
           <Slider
             range={true}
