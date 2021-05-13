@@ -10,6 +10,8 @@ import useFilter from "../../../hooks/useFilter";
 import usePakrs from "../../../hooks/useParks";
 
 import createMarkers from "../../../hooks/createMarkers";
+import makeMarker from "../../../hooks/makeMarker";
+import makeCircle from "../../../hooks/makeCircle";
 
 // 마커 설정 : 기본위치-소마센터
 let nowPlace = {
@@ -28,9 +30,9 @@ export const Map = ({ mobile }) => {
   const parksList = usePakrs();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(parksList, cctvList, lightsList);
-  }, [parksList, cctvList, lightsList]);
+  // useEffect(() => {
+  //   console.log(parksList, cctvList, lightsList);
+  // }, [parksList, cctvList, lightsList]);
 
   const getLocation = () => {
     setLocationArr([
@@ -70,7 +72,17 @@ export const Map = ({ mobile }) => {
     setMarkerArr(createMarkers(locationArr, infoArr, map));
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    try {
+      lightsList['data'].forEach(element => {
+        // console.log(element)
+        makeCircle(element, map)
+        console.log(lightsList.data.length)
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  }, [lightsList]);
 
   useEffect(
     () => map && locationArr.length && infoArr.length && createMarker(),
@@ -87,7 +99,7 @@ export const Map = ({ mobile }) => {
     getLocation();
   }, [map]);
 
-  
+
   const getHCode = function (position) {
     var geocoder = new kakao.maps.services.Geocoder();
     var code;
