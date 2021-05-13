@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setBounds } from "../../../store/parks";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setBounds } from '../../../store/parks';
 
 /* global kakao */
-export const Map = () => {
+export const Map = ({ mobile }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
 
     script.src =
-      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c31d5ee15ff482a2db83f63b7cb22f6&autoload=false";
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c31d5ee15ff482a2db83f63b7cb22f6&autoload=false';
     script.async = true;
 
     document.head.appendChild(script);
 
     script.onload = () => {
       kakao.maps.load(() => {
-        const container = document.getElementById("map");
+        const container = document.getElementById('map');
 
         const options = {
           center: new kakao.maps.LatLng(37.506502, 127.053617),
@@ -37,12 +37,12 @@ export const Map = () => {
           removable: true,
         });
 
-        kakao.maps.event.addListener(marker, "click", () =>
+        kakao.maps.event.addListener(marker, 'click', () =>
           info.open(map, marker)
         );
 
         //Event listener for bounds change
-        kakao.maps.event.addListener(map, "bounds_changed", () =>
+        kakao.maps.event.addListener(map, 'bounds_changed', () =>
           dispatch(setBounds(map.getBounds()))
         );
       });
@@ -51,16 +51,17 @@ export const Map = () => {
     return () => document.head.removeChild(script);
   }, []);
 
+  const height = mobile ? '60vh' : '90vh';
   return (
     <div
       id="map"
-      className="site-layout-background"
+      className="kakaomap"
       style={{
-        padding: 24,
-        minHeight: 360,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: height,
       }}
     >
       Kakao MAP API

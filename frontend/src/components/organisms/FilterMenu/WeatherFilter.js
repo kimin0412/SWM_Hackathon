@@ -1,14 +1,14 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import * as filterSlice from "../../../store/filter/filter";
-import { Menu, Space, Switch, Slider, Button } from "antd";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as filterSlice from '../../../store/filter/filter';
+import { Menu, Space, Switch, Slider, Button } from 'antd';
 import {
   TiWeatherPartlySunny,
   TiWeatherSunny,
   TiWeatherDownpour,
   TiWeatherSnow,
-} from "react-icons/ti";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
+} from 'react-icons/ti';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function WeatherFilter({ key, ...props }) {
   const climate = useSelector((state) => state.filter.climate);
@@ -23,9 +23,10 @@ export default function WeatherFilter({ key, ...props }) {
 
   const dispatch = useDispatch();
 
-  const buttonType = (apply) => (apply ? "primary" : "link");
+  const buttonType = (apply) => (apply ? 'primary' : 'link');
 
   return (
+    // <Menu theme="dark" mode="inline" style={{ width: '100%' }}>
     <Menu.SubMenu
       icon={<TiWeatherPartlySunny />}
       title="Climate"
@@ -108,5 +109,6 @@ export default function WeatherFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
     </Menu.SubMenu>
+    // </Menu>
   );
 }
