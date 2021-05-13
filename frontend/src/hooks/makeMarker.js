@@ -4,9 +4,12 @@ import swal from '@sweetalert/with-react';
 export default function makeMarker(data, map) {
   // const [markerArr, setMarkerArr] = useState([])
   const { kakao } = window;
+  const imageSrc = 'https://i.ibb.co/cvVVdfc/parkIcon.png'
+
   let marker = new kakao.maps.Marker({
     map: map,
     position: new kakao.maps.LatLng(data.lat, data.lon),
+    image: new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(64, 64), new kakao.maps.Point(30, 20)),
   });
   const safety_idx = Math.round(data.safety_idx * 100) / 100;
   const info = new kakao.maps.InfoWindow({
