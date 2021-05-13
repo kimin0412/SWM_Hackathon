@@ -38,25 +38,20 @@ export const HeeMap = () => {
                     center: new kakao.maps.LatLng(37.506502, 127.053617),
                     level: 7,
                 }
-                const createdMap = new kakao.maps.Map(container, options)
-                setMap(createdMap)
-                kakao.maps.event.addListener(map, 'tilesloaded', function () {
+
+                const tmpMap = new kakao.maps.Map(container, options)
+                kakao.maps.event.addListener(tmpMap, "bounds_changed", () => {
                     var bounds = map.getBounds();
                     var level = map.getLevel();
 
-                    let myPosition = {
-                        x1: bounds.ha, // 왼쪽 하단 위도
-                        y1: bounds.qa, // 왼쪽 하단 경도
-                        x2: bounds.oa, // 오른쪽 상단 위도
-                        y2: bounds.pa, // 오른쪽 상단 경도
-                    }
-                    setMapBound(myPosition)
-                    console.log(myPosition);
+                    setMapBound(bounds)
+                    console.log(bounds);
                 });
 
+                const createdMap = tmpMap
+                setMap(createdMap)
             })
         }
-
     }
 
     const createMarker = () => {
@@ -101,24 +96,6 @@ export const HeeMap = () => {
             map,
             locationArr,
         ])
-
-    useEffect(() => {
-        console.log(mapBound)
-    }, [mapBound])
-
-    useEffect(() => {
-        if (map) {
-            let bounds = map.getBounds()
-            let myPosition = {
-                x1: bounds.ha, // 왼쪽 하단 위도
-                y1: bounds.qa, // 왼쪽 하단 경도
-                x2: bounds.oa, // 오른쪽 상단 위도
-                y2: bounds.pa, // 오른쪽 상단 경도
-            }
-            console.log(bounds)
-            setMapBound(myPosition)
-        }
-    }, [map])
 
     return (
         <div id='myMap' style={{
