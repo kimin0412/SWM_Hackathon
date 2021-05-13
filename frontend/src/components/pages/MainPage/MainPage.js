@@ -5,6 +5,7 @@ import { FilterMenu } from '../../organisms/FilterMenu';
 import { Map } from '../../organisms/Map';
 const { Header, Sider, Content } = Layout;
 
+
 export const MainPage = () => {
   const [width, setWidth] = useState(window.innerWidth);
 

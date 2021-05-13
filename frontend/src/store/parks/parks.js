@@ -34,4 +34,5 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
+
 export const { setParkList, setBounds } = slice.actions;
