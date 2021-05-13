@@ -55,7 +55,8 @@ export default function usePark() {
 
   useEffect(() => {
     async function fetchClimate() {
-      if (!parksList || !parksList.data.length === 0 || "climate" in parksList.data[0]) return;
+      if (!parksList || !parksList.data || !("climate" in parksList.data[0]))
+        return;
 
       const modifiedParks = await Promise.all(
         parksList.data.map(async (park) => {
