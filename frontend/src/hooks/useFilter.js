@@ -27,10 +27,6 @@ export default function useFilter() {
         );
       });
     }
-
-    if (filterOptions.climate) {
-      //Todo...
-    }
   }, [filterOptions, parkList, bounds]);
 
   return {
