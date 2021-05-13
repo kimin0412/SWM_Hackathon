@@ -118,7 +118,7 @@ export const Map = ({ mobile }) => {
     return position;
   };
 
-  const height = mobile ? '60vh' : '75vh';
+  const height = mobile ? '60vh' : '87vh';
   return (
     <div
       id="map"

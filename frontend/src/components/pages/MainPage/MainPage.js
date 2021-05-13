@@ -37,7 +37,7 @@ export const MainPage = () => {
         >
           <FilterMenu mobile={false} />
         </Sider>
-        <Content style={{ margin: '3vh 30px 15vh', overflow: 'initial' }}>
+        <Content style={{ margin: '3vh 17px 3vh', overflow: 'initial' }}>
           <Map mobile={false} />
         </Content>
       </Layout>
