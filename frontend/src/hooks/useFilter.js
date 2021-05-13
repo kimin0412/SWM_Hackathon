@@ -31,7 +31,7 @@ export default function useFilter() {
     if (filterOptions.climate && "climate" in parkList.data[0]) {
       const curTime = new Date();
       const time = curTime.getHours();
-      
+
       const idx =
         time < 9
           ? 0
@@ -46,6 +46,7 @@ export default function useFilter() {
           : 5;
 
       setFilteredPark((prevList) => {
+        if (!filterOptions.temperature) return prevList;
         return prevList.filter(
           (park) =>
             filterOptions.temperature[0] <= park.climate[idx].temp &&
