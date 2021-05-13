@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import * as filterSlice from "../../../store/filter/filter";
-import { Menu, Switch, Space, Slider } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { GiStreetLight } from "react-icons/gi";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as filterSlice from '../../../store/filter/filter';
+import { Menu, Switch, Space, Slider } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { GiStreetLight } from 'react-icons/gi';
 
 export default function LightsFilter({ key, ...props }) {
   const light = useSelector((state) => state.filter.light);
@@ -12,6 +12,7 @@ export default function LightsFilter({ key, ...props }) {
   const dispatch = useDispatch();
 
   return (
+    // <Menu theme="dark" mode="inline" style={{ width: '100%' }}>
     <Menu.SubMenu
       icon={<GiStreetLight />}
       title="Street Light"
@@ -45,5 +46,6 @@ export default function LightsFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
     </Menu.SubMenu>
+    // </Menu>
   );
 }

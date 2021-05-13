@@ -1,30 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
+import { history } from '../../../store/store';
 import { FilterMenu } from '../../organisms/FilterMenu';
-import { Map, MinjunMap } from '../../organisms/Map';
+import { Map } from '../../organisms/Map';
+const { Header, Sider, Content } = Layout;
 
-const { Header, Content, Footer, Sider } = Layout;
 
 export const MainPage = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
+
+  useEffect(() => {
+    if (width <= 800) {
+      history.push('/mobile');
+    }
+  }, [width]);
+
   return (
     <Layout>
-      <Sider breakpoint="lg" collapsedWidth="0">
-        <div className="logo" />
-        <FilterMenu />
-      </Sider>
-      <Layout>
-        <Header
-          className="site-layout-sub-header-background"
-          style={{ padding: 0, paddingLeft: 20 }}
+      <Header style={{ padding: 0, height: '7vh' }} />
+      <Layout className="site-body" style={{ marginLeft: 240 }}>
+        <Sider
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+          }}
+          width="240px"
         >
-          SWM HACKATHON TEAM NAME
-        </Header>
-        <Content style={{ margin: '24px 16px 0' }}>
-          <Map />
+          <FilterMenu mobile={false} />
+        </Sider>
+        <Content style={{ margin: '1.5vh 20px', overflow: 'initial' }}>
+          <Map mobile={false} />
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
       </Layout>
     </Layout>
   );

@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import * as filterSlice from "../../../store/filter/filter";
-import { Menu, Space, Switch, Slider } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { GiDustCloud } from "react-icons/gi";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as filterSlice from '../../../store/filter/filter';
+import { Menu, Space, Switch, Slider } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { GiDustCloud } from 'react-icons/gi';
 
 export default function PMFilter({ key, ...props }) {
   const air = useSelector((state) => state.filter.air);
@@ -15,6 +15,7 @@ export default function PMFilter({ key, ...props }) {
   const dispatch = useDispatch();
 
   return (
+    // <Menu theme="dark" mode="inline" style={{ width: '100%' }}>
     <Menu.SubMenu
       icon={<GiDustCloud />}
       title="Air Quality"
@@ -72,5 +73,6 @@ export default function PMFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
     </Menu.SubMenu>
+    // </Menu>
   );
 }

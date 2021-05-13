@@ -1,31 +1,21 @@
-import React, { useState } from "react";
-import { Menu } from "antd";
+import React, { useState } from 'react';
+import { Menu } from 'antd';
 
-import LightsFilter from "./LightsFilter";
-import CCTVFilter from "./CCTVFilter";
-import PMFilter from "./PMFilter";
-import WeatherFilter from "./WeatherFilter";
+import LightsFilter from './LightsFilter';
+import CCTVFilter from './CCTVFilter';
+import PMFilter from './PMFilter';
+import WeatherFilter from './WeatherFilter';
 
-const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4"];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
 
-export const FilterMenu = () => {
-  const [openKeys, setOpenKeys] = useState(["sub1"]);
-
-  const onOpenChange = (keys) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    }
-  };
-
+export const FilterMenu = ({ mobile }) => {
   return (
     <Menu
       theme="dark"
       mode="inline"
-      openKeys={openKeys}
-      onOpenChange={onOpenChange}
+      style={{ width: '100%' }}
+      defaultOpenKeys={mobile ? [] : rootSubmenuKeys}
+      multiple={true}
     >
       <LightsFilter key="sub1" />
       <CCTVFilter key="sub2" />
