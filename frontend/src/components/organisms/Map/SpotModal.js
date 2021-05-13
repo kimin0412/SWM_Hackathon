@@ -4,8 +4,7 @@ import './SpotModal.css';
 import { Bar, Radar } from "react-chartjs-2";
 
 export const SpotModal = (props) => {
-  const data = props.data;
-  const safety_idx = Math.round(data.safety_idx * 100) / 100
+  const safety_idx = Math.round(props.data.safety_idx * 100) / 100
   // // for chart
   // const bar_labels = ["범죄 안전 점수", "코로나 안전 점수", "사용자 리뷰 점수"];
   // const bar_data = {
