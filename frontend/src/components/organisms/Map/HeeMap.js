@@ -41,13 +41,10 @@ export const HeeMap = () => {
 
                 const tmpMap = new kakao.maps.Map(container, options)
                 kakao.maps.event.addListener(tmpMap, "bounds_changed", () => {
-                    var bounds = map.getBounds();
-                    var level = map.getLevel();
-
+                    var bounds = tmpMap.getBounds();
                     setMapBound(bounds)
                     console.log(bounds);
                 });
-
                 const createdMap = tmpMap
                 setMap(createdMap)
             })
