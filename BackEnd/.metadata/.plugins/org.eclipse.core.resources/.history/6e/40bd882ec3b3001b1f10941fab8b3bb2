@@ -1,0 +1,16 @@
+//package com.swmaestro.hackathon.swm14.repository;
+//
+//import java.time.LocalDateTime;
+//import java.util.List;
+//import java.util.Optional;
+//
+//import org.springframework.data.repository.CrudRepository;
+//
+//import com.swmaestro.hackathon.swm14.dto.ForecastDto;
+//
+//public interface IForecastRepository extends CrudRepository<ForecastDto, String> {
+//	@Override
+//	List<ForecastDto> findAll();
+//
+//	Optional<ForecastDto> findByForecastDateTime(LocalDateTime forecastDateTime);
+//}

@@ -1,0 +1,24 @@
+package com.swmaestro.hackathon.swm14.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.swmaestro.hackathon.swm14.dto.Cctv;
+import com.swmaestro.hackathon.swm14.dto.Streetlamps;
+
+@Repository
+public interface IStreetlampsRepository extends JpaRepository<Streetlamps, Object> {
+
+	@Query(value = "select * from CCTVs", nativeQuery = true)
+	List<Cctv> findAllCCTVs();
+
+	@Query(value = "select * from CCTVs where lat between ?1 and ?3 AND lon between ?2 and ?4", nativeQuery = true)
+	List<Cctv> findRangeCCTVs(double lat1, double lon1, double lat2, double lon2);
+
+//	@Query(value = "select * from Playlist where day = ?1 and category = ?2", nativeQuery = true)
+//	List<Playlist> findCategoryPlaylist(int day, int category);
+
+}

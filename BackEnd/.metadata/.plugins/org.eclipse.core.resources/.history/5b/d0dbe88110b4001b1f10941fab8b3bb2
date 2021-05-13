@@ -1,0 +1,106 @@
+package com.swmaestro.hackathon.swm14.dto;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "comments")
+@Getter
+@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@JsonInclude(JsonInclude.Include.ALWAYS)
+public class Comment {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+//	@Column
+	@Column(insertable=false, updatable=false)
+	private int id; // pk 아이디
+	
+	private int rating; // 점수
+	private String comment; // 내용
+	private String IP; // 아이피
+	
+	@Column(insertable=false, updatable=false)
+	private LocalDateTime update_time; // 시간
+	private int park_id; // 공원 id
+	private String image; // 이미지 링크
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getIP() {
+		return IP;
+	}
+
+	public void setIP(String iP) {
+		IP = iP;
+	}
+
+	public LocalDateTime getUpdate_time() {
+		return update_time;
+	}
+
+	public void setUpdate_time(LocalDateTime update_time) {
+		this.update_time = update_time;
+	}
+
+	public int getPark_id() {
+		return park_id;
+	}
+
+	public void setPark_id(int park_id) {
+		this.park_id = park_id;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", rating=" + rating + ", comment=" + comment + ", IP=" + IP + ", update_time="
+				+ update_time + ", park_id=" + park_id + ", image=" + image + "]";
+	}
+
+}

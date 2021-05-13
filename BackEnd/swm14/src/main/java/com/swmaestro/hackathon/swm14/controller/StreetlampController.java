@@ -1,0 +1,80 @@
+package com.swmaestro.hackathon.swm14.controller;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.swmaestro.hackathon.swm14.dto.Cctv;
+import com.swmaestro.hackathon.swm14.dto.Streetlamp;
+import com.swmaestro.hackathon.swm14.service.ICctvService;
+import com.swmaestro.hackathon.swm14.service.IStreetlampService;
+
+import io.swagger.annotations.ApiOperation;
+
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/streetlamp")
+public class StreetlampController {
+	public static final Logger logger = LoggerFactory.getLogger(StreetlampController.class);
+
+	@Autowired
+	private IStreetlampService streetlampService;
+
+	@Autowired
+	public StreetlampController(IStreetlampService streetlampService) {
+		Assert.notNull(streetlampService, "streetlampService 개체가 반드시 필요!");
+		this.streetlampService = streetlampService;
+	}
+
+	// 모든 플레이리스트 목록 조회
+	@ApiOperation(value = "모든 가로등 조회")
+	@GetMapping("/all")
+	public ResponseEntity<HashMap<String, Object>> getAllStreetlamps(HttpServletRequest request) throws Exception {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		List<Streetlamp> streetlamps = streetlampService.getAllStreetlamps();
+
+		map.put("data", streetlamps);
+		return new ResponseEntity<HashMap<String, Object>>(map, HttpStatus.OK);
+	}
+
+	// 낮밤별 플레이리스트 목록 조회
+	@ApiOperation(value = "범위 안 가로등 조회")
+	@GetMapping("/{lat1}/{lon1}/{lat2}/{lon2}")
+	public ResponseEntity<HashMap<String, Object>> getRanngeStreetlamps(@PathVariable("lat1") double lat1,
+			@PathVariable("lon1") double lon1, @PathVariable("lat2") double lat2, @PathVariable("lon2") double lon2,
+			HttpServletRequest request) throws Exception {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		List<Streetlamp> streetlamps = streetlampService.getRangeStreetlamps(lat1, lon1, lat2, lon2);
+
+		map.put("data", streetlamps);
+		return new ResponseEntity<HashMap<String, Object>>(map, HttpStatus.OK);
+	}
+
+//	// 카테고리별 플레이리스트 목록 조회
+//	@ApiOperation(value = "카테고리별 Playlist 조회")
+//	@GetMapping("/{day}/{category}")
+//	public ResponseEntity<HashMap<String, Object>> getCategoryPlaylists(@PathVariable("category") int category,
+//			@PathVariable("day") int day, HttpServletRequest request) throws Exception {
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//
+//		List<Playlist> playlists = playlistService.getCategoryPlaylists(day, category);
+//
+//		map.put("data", playlists);
+//		return new ResponseEntity<HashMap<String, Object>>(map, HttpStatus.OK);
+//	}
+}
