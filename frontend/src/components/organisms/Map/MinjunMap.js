@@ -142,7 +142,7 @@ export const MinjunMap = () => {
                         y2: bounds.pa, // 오른쪽 상단 경도
                     }
 
-//                     console.log(myPosition);
+                    console.log(myPosition);
                     });
                 
                 

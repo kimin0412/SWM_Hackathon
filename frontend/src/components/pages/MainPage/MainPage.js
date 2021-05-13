@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { FilterMenu } from '../../organisms/FilterMenu';
-import { Map } from '../../organisms/Map';
+import { Map, MinjunMap } from '../../organisms/Map';
 
 const { Header, Content, Footer, Sider } = Layout;
 
