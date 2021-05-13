@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Menu, Slider, Switch, Space, Typography } from "antd";
+import React, { useState } from 'react';
+import { Menu, Slider, Switch, Space, Typography } from 'antd';
 
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { RiVirusLine } from "react-icons/ri";
-import { GiDustCloud, GiStreetLight, GiTrafficCone } from "react-icons/gi";
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import { RiVirusLine } from 'react-icons/ri';
+import { GiDustCloud, GiStreetLight, GiTrafficCone } from 'react-icons/gi';
 
 const { SubMenu } = Menu;
-const rootSubmenuKeys = ["sub1", "sub2", "sub3", "sub4"];
+const rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
 
-export default function Filter() {
-  const [openKeys, setOpenKeys] = useState(["sub1"]);
+export const Filter = () => {
+  const [openKeys, setOpenKeys] = useState(['sub1']);
 
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
@@ -62,4 +62,4 @@ export default function Filter() {
       </SubMenu>
     </Menu>
   );
-}
+};

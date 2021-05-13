@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 /* global kakao */
-export default function Map() {
+export const Map = () => {
   useEffect(() => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
 
     script.src =
-      "https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c31d5ee15ff482a2db83f63b7cb22f6&autoload=false";
+      'https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c31d5ee15ff482a2db83f63b7cb22f6&autoload=false';
     script.async = true;
 
     document.head.appendChild(script);
 
     script.onload = () => {
       kakao.maps.load(() => {
-        const container = document.getElementById("map");
+        const container = document.getElementById('map');
 
         const options = {
           center: new kakao.maps.LatLng(37.506502, 127.053617),
@@ -33,7 +33,7 @@ export default function Map() {
           removable: true,
         });
 
-        kakao.maps.event.addListener(marker, "click", () =>
+        kakao.maps.event.addListener(marker, 'click', () =>
           info.open(map, marker)
         );
       });
@@ -49,12 +49,12 @@ export default function Map() {
       style={{
         padding: 24,
         minHeight: 360,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       Kakao MAP API
     </div>
   );
-}
+};
