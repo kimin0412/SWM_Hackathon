@@ -3,7 +3,8 @@ import { Layout } from 'antd';
 
 import { Filter } from '../../organisms/Filter';
 // import { Map } from '../../organisms/Map';
-import { MinjunMap } from '../../organisms/Map';
+// import { MinjunMap } from '../../organisms/Map';
+import { HeeMap } from '../../organisms/Map';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -22,7 +23,7 @@ export const MainPage = () => {
           SWM HACKATHON TEAM NAME
         </Header>
         <Content style={{ margin: '24px 16px 0' }}>
-          <MinjunMap />
+          <HeeMap />
         </Content>
         <Footer style={{ textAlign: 'center' }}>
           Ant Design ©2018 Created by Ant UED
