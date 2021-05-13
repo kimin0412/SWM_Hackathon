@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { setCCTVList } from "../store/parks";
 
 export default function useCCTV() {
-  const CCTVList = useSelector((state) => state.parks.CCTVList);
+  const [CCTVList, setCCTVList] = useState([]);
   const bounds = useSelector((state) => state.parks.bounds);
 
   const [wholeBounds, setWholeBounds] = useState(bounds);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (bounds === null || bounds.qa === null || wholeBounds === null) return;
@@ -51,11 +48,10 @@ export default function useCCTV() {
     })
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
-        dispatch(setCCTVList(data));
+        setCCTVList(data);
       })
       .catch((err) => console.log(err));
-  }, [wholeBounds, dispatch]);
+  }, [wholeBounds]);
 
   return CCTVList;
 }
