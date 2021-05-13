@@ -48,7 +48,7 @@ export default function useFilter(markerArr, map) {
         });
       }
 
-      if (filterOptions.cctv) {
+      if (filterOptions.climate) {
         setFilteredPark((prevList) => {
           return prevList.filter((park) => {
             if (
@@ -66,7 +66,7 @@ export default function useFilter(markerArr, map) {
         });
       }
 
-      if (filterOptions.climate) {
+      if (filterOptions.cctv) {
         setFilteredPark((prevList) => {
           return prevList.filter((park) => {
             if (
