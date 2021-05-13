@@ -40,17 +40,7 @@ export const Map = ({ mobile }) => {
 
   const getLocation = () => {
     setLocationArr([
-      { mapX: 127.0425755, mapY: 37.503412 },
-      { mapX: 127.036719, mapY: 37.500054 },
-      { mapX: 127.038356, mapY: 37.500338 },
-
-      getGeolocation(),
-    ]);
-    setInfoArr([
-      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
-      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
-      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
-      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
+      getGeolocation()
     ]);
   };
 
