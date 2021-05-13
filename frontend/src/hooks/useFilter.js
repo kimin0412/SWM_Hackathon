@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import useParks from './useParks';
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import useParks from "./useParks";
 
 export default function useFilter() {
   const filterOptions = useSelector((state) => state.filter);
@@ -29,6 +29,29 @@ export default function useFilter() {
     }
 
     if (filterOptions.climate && "climate" in parkList.data[0]) {
+      const curTime = new Date();
+      const time = curTime.getHours();
+      
+      const idx =
+        time < 9
+          ? 0
+          : time < 12
+          ? 1
+          : time < 15
+          ? 2
+          : time < 18
+          ? 3
+          : time < 21
+          ? 4
+          : 5;
+
+      setFilteredPark((prevList) => {
+        return prevList.filter(
+          (park) =>
+            filterOptions.temperature[0] <= park.climate[idx].temp &&
+            park.climate[idx].temp <= filterOptions.temperature[0]
+        );
+      });
     }
   }, [filterOptions, parkList, bounds]);
 
