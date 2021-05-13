@@ -31,7 +31,7 @@ export const Map = ({ mobile }) => {
   const [infoArr, setInfoArr] = useState([]);
   const cctvList = useCCTV();
   const lightsList = useLights();
-  const parksList = usePakrs();
+  const parksList = useFilter();
   const dispatch = useDispatch();
 
   useEffect(() => {

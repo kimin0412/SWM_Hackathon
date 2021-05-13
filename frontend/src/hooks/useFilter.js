@@ -7,13 +7,15 @@ export default function useFilter() {
   const parkList = useParks();
   const bounds = useSelector((state) => state.parks.bounds);
 
-  const [filteredPark, setFilteredPark] = useState(parkList);
+  const [filteredPark, setFilteredPark] = useState(parkList.data);
 
   useEffect(() => {
+    setFilteredPark(parkList.data);
+
     if (filterOptions.light) {
       setFilteredPark((prevList) => {
         return prevList.filter(
-          (park) => park.streatlamp >= filterOptions.nearbyLight
+          (park) => park.streetlamp >= filterOptions.nearbyLight
         );
       });
     }
@@ -27,5 +29,7 @@ export default function useFilter() {
     }
   }, [filterOptions, parkList, bounds]);
 
-  return filteredPark;
+  return {
+    data: filteredPark,
+  };
 }

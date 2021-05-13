@@ -73,9 +73,10 @@ export default function WeatherFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
 
-      <Menu.ItemGroup key="g2" title={`Temperature (${temperature}°C)`}>
+      <Menu.ItemGroup key="g2" title={`Temperature (${temperature[0]} ~ ${temperature[1]}°C)`}>
         <Menu.Item key="1" className="unselectable">
           <Slider
+            range={true}
             min={-10}
             max={40}
             value={temperature}
@@ -85,7 +86,7 @@ export default function WeatherFilter({ key, ...props }) {
         </Menu.Item>
       </Menu.ItemGroup>
 
-      <Menu.ItemGroup key="g3" title={`Precipitation (${precipitation} mm)`}>
+      <Menu.ItemGroup key="g3" title={`Precipitation (${precipitation} %)`}>
         <Menu.Item key="1" className="unselectable">
           <Slider
             min={0}
