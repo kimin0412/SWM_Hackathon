@@ -4,14 +4,14 @@ import swal from '@sweetalert/with-react';
 /* global kakao */
 export default function makeMarker(data, map) {
     // const [markerArr, setMarkerArr] = useState([])
-    console.log(data)
     const { kakao } = window
     let marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(data.lat, data.lon),
     })
+    const safety_idx = Math.round(data.safety_idx * 100)/100
     const info = new kakao.maps.InfoWindow({
-        content: `<div><h2>${data.park_name}</h2><p>안전점수...</p><p>기타등등...</p></div>`,
+        content: `<div><h2>${data.park_name}</h2><p>안전점수 ${safety_idx}</p><p>CCTV 수 ${data.cctv_cnt}</p><p>가로등 수 ${data.streetlamp}</p></div>`,
         removable: true,
     });
     kakao.maps.event.addListener(marker, 'mouseover', function () {
@@ -25,7 +25,7 @@ export default function makeMarker(data, map) {
     });
     kakao.maps.event.addListener(marker, 'click', () => {
         swal(
-            <SpotModal />
+            <SpotModal data={data} />
         );
     })
     return marker
