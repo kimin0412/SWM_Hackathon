@@ -8,7 +8,6 @@ export default function useCCTV() {
   const bounds = useSelector((state) => state.parks.bounds);
 
   const [wholeBounds, setWholeBounds] = useState(bounds);
-  const [update, setUpdate] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -52,6 +51,7 @@ export default function useCCTV() {
     })
       .then((res) => res.data)
       .then((data) => {
+        console.log(data);
         dispatch(setCCTVList(data));
       })
       .catch((err) => console.log(err));

@@ -1,11 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import useMap from "../../../hooks/useMap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setBounds } from "../../../store/parks";
-import axios from "axios";
-// 모달
-import swal from "@sweetalert/with-react";
-import { SpotModal } from "../Map";
 
 import useCCTV from "../../../hooks/useCCTV";
 import createMarkers from "../../../hooks/createMarkers";
@@ -19,26 +15,30 @@ let nowPlace = {
 /* global kakao */
 export const Map = () => {
   const map = useMap();
-  const [markerArr, setMarkerArr] = useState([])
-  const [locationArr, setLocationArr] = useState([])
-  const [infoArr, setInfoArr] = useState([])
+  const [markerArr, setMarkerArr] = useState([]);
+  const [locationArr, setLocationArr] = useState([]);
+  const [infoArr, setInfoArr] = useState([]);
   const CCTVList = useCCTV();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log(CCTVList);
+  }, [CCTVList]);
 
   const getLocation = () => {
     setLocationArr([
       { mapX: 127.0425755, mapY: 37.503412 },
       { mapX: 127.036719, mapY: 37.500054 },
       { mapX: 127.038356, mapY: 37.500338 },
-      getGeolocation()
-    ])
+      getGeolocation(),
+    ]);
     setInfoArr([
       `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
       `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
       `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
-      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,])
-  }
+      `<div><h2>소마공원</h2><p>안전점수...</p><p>기타등등...</p></div>`,
+    ]);
+  };
 
   const getGeolocation = () => {
     // 위치 정보가 사용이 가능하면
@@ -53,29 +53,30 @@ export const Map = () => {
       // 기본 위치 설정
       nowPlace = {
         mapX: 127.0425755,
-        mapX: 37.503412,
-      }
+        mapY: 37.503412,
+      };
     }
-    return nowPlace
-  }
+    return nowPlace;
+  };
   const createMarker = () => {
-    setMarkerArr(createMarkers(locationArr, infoArr, map))
-  }
+    setMarkerArr(createMarkers(locationArr, infoArr, map));
+  };
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, []);
 
-  useEffect(() => map && locationArr.length && infoArr.length && createMarker(),
-    [map, locationArr, infoArr])
+  useEffect(
+    () => map && locationArr.length && infoArr.length && createMarker(),
+    [map, locationArr, infoArr]
+  );
 
   useEffect(() => {
     if (map == null) return;
 
     //Event listener for bounds change
     kakao.maps.event.addListener(map, "bounds_changed", () => {
-      dispatch(setBounds(map.getBounds()))
+      dispatch(setBounds(map.getBounds()));
     });
-    getLocation()
+    getLocation();
   }, [map]);
 
   const getHCode = function (position) {
