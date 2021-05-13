@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://15.165.135.86:8080/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@sweetalert/with-react": "^0.1.1",

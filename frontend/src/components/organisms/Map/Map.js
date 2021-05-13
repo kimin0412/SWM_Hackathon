@@ -2,7 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import useMap from "../../../hooks/useMap";
 import { useSelector, useDispatch } from "react-redux";
 import { setBounds } from "../../../store/parks";
-import axios from "axios";
+import axios from 'axios';
+import https from 'https';
 // 모달
 import swal from "@sweetalert/with-react";
 import { SpotModal } from "../Map";
@@ -84,7 +85,7 @@ export const Map = () => {
 
   useEffect(() => {
   }, [])
-
+    
   useEffect(() => map && locationArr.length && createMarker(),
     [
       map,
@@ -152,7 +153,7 @@ export const Map = () => {
       className="site-layout-background"
       style={{
         padding: 24,
-        minHeight: 360,
+        minHeight: 720,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
