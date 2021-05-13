@@ -75,7 +75,7 @@ export const Map = ({ mobile }) => {
     } catch (e) {
       console.log(e);
     }
-  }, [parksList, makeMarker]);
+  }, [parksList]);
 
   useEffect(
     () => map && locationArr.length && infoArr.length && createMarker(),
@@ -90,7 +90,7 @@ export const Map = ({ mobile }) => {
       dispatch(setBounds(map.getBounds()));
     });
     getLocation();
-  }, [map, dispatch, getLocation]);
+  }, [map]);
 
   const getHCode = function (position) {
     var geocoder = new kakao.maps.services.Geocoder();
