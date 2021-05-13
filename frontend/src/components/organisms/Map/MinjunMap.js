@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import https from 'https';
 // 모달
 import swal from '@sweetalert/with-react';
 import {SpotModal} from '../Map';
+
 
 // 마커 설정 : 기본위치-소마센터
 let nowPlace = {
@@ -86,17 +88,43 @@ export const MinjunMap = () => {
                         map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
     
                         displayMarker(nowPlace);
-                    });
+                        
+                       
+                        var test_arr = [
+                            { x: 127.0425755, y: 37.503412},
+                            { x: 127.0425755, y: 37.503412},
+                            { x: 127.0425755, y: 37.503412},
+                            { x: 127.0425755, y: 37.503412}
+                        ];
+                        
+                        
+                        test_arr.forEach(element => getHCode(element));
+                        
+                        console.log(test_arr);
+
+                    });    
                 } else {
                     // 기본 위치 설정
                     nowPlace = {
-                        // 왜 소마센터가 아니지
                         x: 127.0425755,
                         y: 37.503412
                     };
+                    
+                    map.setCenter(new kakao.maps.LatLng(nowPlace.y, nowPlace.x));
+                    
                     displayMarker(nowPlace);
+                    
+                    var test_arr = [
+                        { x: 127.0425755, y: 37.503412},
+                        { x: 127.0425755, y: 37.503412},
+                        { x: 127.0425755, y: 37.503412},
+                        { x: 127.0425755, y: 37.503412}
+                    ];
 
 
+                    test_arr.forEach(element => getHCode(element));
+
+                    console.log(test_arr);
 
                 }
 
@@ -104,7 +132,6 @@ export const MinjunMap = () => {
                 kakao.maps.event.addListener(map, 'tilesloaded', function() {
                     var bounds = map.getBounds();
                     var level = map.getLevel();
-                    
                     
                     
 
@@ -115,10 +142,10 @@ export const MinjunMap = () => {
                         y2: bounds.pa, // 오른쪽 상단 경도
                     }
 
-                    console.log(myPosition);
+//                     console.log(myPosition);
                     });
                 
-                getHCode(myPosition);
+                
             });
         };
         
@@ -128,46 +155,53 @@ export const MinjunMap = () => {
     }, []);
 
 
-    // function axiosTest(){
-    //     console.log('start');
-    //     axios.get('https://www.naver.com/')
-    //     .then((Response) => {console.log(Response.data)})
-    //     .catch((Error) => {console.log(Error)})
-        
-    // }
-
-    // axiosTest();
-    
-    function getHCode(position){
+    var getHCode = function (position){
         var geocoder = new kakao.maps.services.Geocoder();
         var code;
         
         var callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
 
-                    console.log(result[0])
-                    console.log('지역 명칭 : ' + result[0].address_name);
-                    console.log('행정구역 코드 : ' + result[0].code);
+                    position.tmp = 20;
+                    position.pop = 0;
+//                     const agent = new https.Agent({  
+//                       rejectUnauthorized: false
+//                     });
                 
-                    code = result[0].code;
-                }
-            };
+                    // axios.get('http://15.165.135.86:8080/api/weather?zone=' + result[1].code, {httpsAgent: agent })
+                    // .then((Response) => {console.log(Response.data); position.weather = Response.kmaList.wfKor})
+                    // .catch((Error) => {console.log(Error)})
+                    
+                    // At instance level
+                    // const instance = axios.create({
+                    //   httpsAgent: new https.Agent({  
+                    //     rejectUnauthorized: false
+                    //   })
+                    // });
+                
+                    // instance.get('http://15.165.135.86:8080/api/weather?zone=' + result[1].code);
+
+                
+            }else{
+
+            }
+        };
 
         geocoder.coord2RegionCode(position.x, position.y, callback);
-        
-        return code;
-        
+
+        return position;
     }
     
-        return (
-            <div id='myMap' style={{
-                padding: 24,
-                minHeight: 360,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}>
 
-            </div>
-        );
-    }
+    return (
+        <div id='myMap' style={{
+            padding: 24,
+            minHeight: 360,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+
+        </div>
+    );
+}

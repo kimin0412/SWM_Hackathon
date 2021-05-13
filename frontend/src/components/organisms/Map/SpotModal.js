@@ -1,6 +1,6 @@
 import React from 'react';
 import swal from '@sweetalert/with-react';
-import styles from './css/SpotModal.css';
+import styles from './SpotModal.css';
 
 export const SpotModal = () => {
     return (
@@ -8,8 +8,8 @@ export const SpotModal = () => {
             <h1>소마공원</h1>  
 
             <h3>*전체 점수*</h3>
-            <p>95점</p>
-            <table className={styles.center}>
+            <p className={styles.center}>95점</p>
+            <table>
                 <thead>
                     <tr>
                         <th>범죄 안전 점수</th>
