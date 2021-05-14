@@ -1,4 +1,3 @@
-
 # 위험 산책 멈춰! 🖐 - 개발된 완성자
 
 ## Team14:  개발된 완성자
@@ -39,7 +38,7 @@
 
 
 
-<img src="/Users/jun/Library/Application Support/typora-user-images/image-20210514064050733.png" alt="image-20210514064050733" style="zoom:33%;" />
+![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3db70eca-cd9e-413e-849b-250f4b75abfe%2FUntitled.png?table=block&id=6b549ace-9067-48c2-9551-5ff09f22b767&width=4690&userId=&cache=v2)
 
 
 
@@ -129,9 +128,20 @@
 
 #### 메인 화면
 
+<img src="https://raw.githubusercontent.com/kimin0412/SWM_Hackathon/main/ReadmeImages/screen1.png?token=AJ3SV2MDKZYAWG2ZVZCM57TAU4BNK" alt="img" style="zoom:50%;" />
 
 
 
+- 자신의 위치를 중점으로 모든 공원이 표시됩니다!
+- CCTV, 가로등 대수 등 다양한 필터기능을 적용해 입맛에 맞게 확인할 수 있습니다.
+
+
+
+#### 정보 화면
+
+![img](https://raw.githubusercontent.com/kimin0412/SWM_Hackathon/main/ReadmeImages/screen2.png?token=AJ3SV2O7UGFWQZICOHZQNM3AU4BUG)
+
+- 각 공원별 마커를 눌러서 CCTV / 가로등 설치 대수와 종합 안전 점수를 확인할 수 있습니다.
 
 
 
@@ -235,4 +245,3 @@
 ![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F58337c6d-dbb9-4ef3-ad7d-7308a1846f09%2FUntitled.png?table=block&id=63983ee6-47df-48e8-9ac6-687b778154ff&width=1150&userId=&cache=v2)
 
 ![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5547eda5-dd67-4a2f-9d80-31c3f29c107b%2FUntitled.png?table=block&id=22ac0bc9-8cba-4a8e-be03-063448537c4e&width=1140&userId=&cache=v2)
-
