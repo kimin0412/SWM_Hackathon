@@ -1,0 +1,24 @@
+package com.swmaestro.hackathon.swm14.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.swmaestro.hackathon.swm14.dto.Cctv;
+import com.swmaestro.hackathon.swm14.dto.Comment;
+
+@Repository
+public interface ICommentRepository extends JpaRepository<Comment, Object> {
+
+	@Query(value = "select * from comments", nativeQuery = true)
+	List<Comment> findAllComments();
+
+	@Query(value = "select * from comments where park_id=?1", nativeQuery = true)
+	List<Comment> findParkComments(double lat1, double lon1, double lat2, double lon2);
+
+//	@Query(value = "select * from Playlist where day = ?1 and category = ?2", nativeQuery = true)
+//	List<Playlist> findCategoryPlaylist(int day, int category);
+
+}

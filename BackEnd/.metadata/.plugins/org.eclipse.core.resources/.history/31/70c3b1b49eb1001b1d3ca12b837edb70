@@ -1,0 +1,6 @@
+package com.swmaestro.hackathon.swm14.service;
+
+public interface IPlaylistService {
+	// 모든 플레이리스트 조회 
+		public List<Gifticon> getAllGifticons(int cid);
+}

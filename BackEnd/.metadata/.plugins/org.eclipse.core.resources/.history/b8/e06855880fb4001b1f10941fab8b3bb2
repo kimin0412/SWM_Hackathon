@@ -1,0 +1,33 @@
+package com.swmaestro.hackathon.swm14.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.swmaestro.hackathon.swm14.dto.Comment;
+import com.swmaestro.hackathon.swm14.repository.ICommentRepository;
+import com.swmaestro.hackathon.swm14.service.ICommentService;
+
+@Service
+public class CommentServiceImpl implements ICommentService {
+
+	@Autowired
+	private ICommentRepository commentRepo;
+
+	@Override
+	public List<Comment> getAllComments() {
+		return commentRepo.findAllComments();
+	}
+
+	@Override
+	public List<Comment> getParkComments(int park_id) {
+		return commentRepo.findParkComments(park_id);
+	}
+
+	@Override
+	public int registComment(int rating, String comment, String IP, int park_id, String image) {
+		return commentRepo.insertComment(rating, comment, IP, park_id, image);
+	}
+
+}

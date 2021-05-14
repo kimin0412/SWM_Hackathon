@@ -1,0 +1,21 @@
+package com.swmaestro.hackathon.swm14.config;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+@Configuration
+@PropertySource(value = "classpath:forecast.yml", factory = YamlPropertySourceFactory.class)
+@ConfigurationProperties(prefix = "api")
+public class ForecastYmlRead {
+
+	private String serviceKey;
+
+	public String getServiceKey() {
+		return serviceKey;
+	}
+
+	public void setServiceKey(String serviceKey) {
+		this.serviceKey = serviceKey;
+	}
+}

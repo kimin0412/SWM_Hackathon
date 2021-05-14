@@ -1,0 +1,19 @@
+package com.swmaestro.hackathon.swm14.config;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ConfigurationProperties(prefix = "api")
+public class ApplicationYamlRead {
+
+	private String serviceKey;
+
+	public String getServiceKey() {
+		return serviceKey;
+	}
+
+	public void setServiceKey(String serviceKey) {
+		this.serviceKey = serviceKey;
+	}
+}
