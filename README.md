@@ -1,3 +1,4 @@
+
 # 위험 산책 멈춰! 🖐 - 개발된 완성자
 
 ## Team14:  개발된 완성자
@@ -234,3 +235,4 @@
 ![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F58337c6d-dbb9-4ef3-ad7d-7308a1846f09%2FUntitled.png?table=block&id=63983ee6-47df-48e8-9ac6-687b778154ff&width=1150&userId=&cache=v2)
 
 ![img](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5547eda5-dd67-4a2f-9d80-31c3f29c107b%2FUntitled.png?table=block&id=22ac0bc9-8cba-4a8e-be03-063448537c4e&width=1140&userId=&cache=v2)
+

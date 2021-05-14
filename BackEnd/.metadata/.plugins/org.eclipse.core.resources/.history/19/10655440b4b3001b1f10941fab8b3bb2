@@ -1,0 +1,5 @@
+package com.swmaestro.hackathon.swm14.config;
+
+public class YamlPropertySourceFactory {
+
+}

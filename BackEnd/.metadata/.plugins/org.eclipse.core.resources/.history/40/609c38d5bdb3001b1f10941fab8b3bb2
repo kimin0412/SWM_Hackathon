@@ -1,0 +1,40 @@
+package com.swmaestro.hackathon.swm14.dto;
+
+public class ForecastDto {
+
+	private String POP; // 강수확률
+
+	private String PTY; // 강수형태
+
+	private String T3H; // 3시간 기온
+
+	public String getPOP() {
+		return POP;
+	}
+
+	public void setPOP(String POP) {
+		this.POP = POP;
+	}
+
+	public String getPTY() {
+		return PTY;
+	}
+
+	public void setPTY(String PTY) {
+		this.PTY = PTY;
+	}
+
+	public String getT3H() {
+		return T3H;
+	}
+
+	public void setT3H(String t3H) {
+		T3H = t3H;
+	}
+
+	@Override
+	public String toString() {
+		return "ForecastDto [POP=" + POP + ", PTY=" + PTY + ", T3H=" + T3H + "]";
+	}
+
+}

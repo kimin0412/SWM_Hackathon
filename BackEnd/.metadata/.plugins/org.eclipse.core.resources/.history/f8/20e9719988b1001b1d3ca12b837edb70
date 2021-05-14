@@ -1,0 +1,35 @@
+package com.swmaestro.hackathon.swm14.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.ColumnDefault;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@JsonInclude(JsonInclude.Include.ALWAYS)
+public class Playlist {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column
+    private int id;						// pk 아이디
+	private String name;				// 상품 이름
+	private int price;					// 상품 가격
+	private boolean purchase;			// 구매 여부 => false : 아직 구매 X, true : 누군가 구매
+	private String image;				// 기프티콘 이미지 url
+	private String code;				// 기프티콘 코드(쿠폰번호)
+	private int category;		
+}

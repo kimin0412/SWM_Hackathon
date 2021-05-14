@@ -1,0 +1,91 @@
+//package com.swmaestro.hackathon.swm14.service;
+//
+//import java.time.LocalDateTime;
+//
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.boot.web.client.RestTemplateBuilder;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Service;
+//import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.util.DefaultUriBuilderFactory;
+//import org.springframework.web.util.UriBuilder;
+//
+//import com.swmaestro.hackathon.swm14.dto.ForecastDto;
+//import com.swmaestro.hackathon.swm14.repository.IForecastRepository;
+//
+//@Service
+//public class IForecastService {
+////	private final ForecastYmlRead forecastYmlRead;
+//	@Value("${api.key}")
+//	private final String key;
+//	
+//	private final RestTemplate restTemplate;
+//
+//	private final IForecastRepository forecastRepository;
+//
+//	public IForecastService(RestTemplateBuilder restTemplateBuilder, IForecastRepository forecastRepository) {
+//this.key = "";
+//		//        this.key = "";
+//		this.restTemplate = restTemplateBuilder.build();
+////        this.forecastYmlRead = forecastYmlRead;
+//        this.forecastRepository = forecastRepository;
+//    }
+//
+//	// 0. 메인으로 보여줄 타임 구하기
+//	public LocalDateTime calculateMainTime() {
+//		LocalDateTime currDateTime = LocalDateTime.now();
+//		int currHour = currDateTime.getHour();
+//
+//		if (currHour <= 6) {
+//			return currDateTime.plusHours(6 - currHour);
+//		} else if (currHour <= 9) {
+//			return currDateTime.plusHours(9 - currHour);
+//		} else if (currHour <= 18) {
+//			return currDateTime.plusHours(18 - currHour);
+//		} else if (currHour <= 21) {
+//			return currDateTime.plusHours(21 - currHour);
+//		} else {
+//			return currDateTime.plusHours(6 + 24 - currHour);
+//		}
+//	}
+//
+//	// TODO 1. 메인 타임으로부터 가장 가까운 발표 시각 구하기
+//	public int getForecastTime(LocalDateTime mainDateTime) {
+//		int forecastTime = mainTime - 4;
+//
+//		while (currHour <= forecastTime) {
+//			forecastTime -= 3;
+//		}
+//
+//	}
+//
+//	// TODO 2. API 요청 시각으로 Redis 캐싱 여부 조회
+////    boolean isCached(LocalDateTime requestDateTime) {
+////
+////    }
+////
+////
+////    //TODO 3. 가장 가까운 발표 시각으로부터 필요한 numOfRows의 값을 구하기
+////    int getNumOfRows(LocalDateTime forecastTime) {
+////
+////    }
+////
+//	// TODO 4. 가장 가까운 발표 시각으로 요청하고 응답받기 -> 해당 응답값을 Controller에서 response하면 json응답!
+//	ForecastDto requestForecast(LocalDateTime forecastTime) {
+//		String callUri = "http://apis.data.go.kr";
+//
+//		DefaultUriBuilderFactory uriBuilderFactory = new DefaultUriBuilderFactory(callUri);
+//		uriBuilderFactory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+//
+//		UriBuilder uriBuilder = uriBuilderFactory.builder();
+//		uriBuilder.path("/1360000/VilageFcstInfoService/getVilageFcst")
+//				.queryParam("ServiceKey", forecastYmlRead.getServiceKey()).queryParam("pageNo", "1")
+//				.queryParam("numOfRows", "10").queryParam("dataType", "JSON").queryParam("base_date", "20200526")
+//				.queryParam("base_time", "1400").queryParam("nx", "1").queryParam("ny", "1");
+//
+//		ResponseEntity responseEntity = restTemplate.exchange(uriBuilder.build(), HttpMethod.GET, null, String.class);
+//		String response = (String) responseEntity.getBody();
+//		System.out.println(response);
+//	}
+//}

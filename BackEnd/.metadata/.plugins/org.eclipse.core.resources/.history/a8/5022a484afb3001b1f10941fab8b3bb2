@@ -1,0 +1,8 @@
+package com.swmaestro.hackathon.swm14.repository;
+
+public class IForecastRepository {
+	@Override
+	List<Forecast> findAll();
+
+	Optional<Forecast> findByForecastDateTime(LocalDateTime forecastDateTime);
+}
