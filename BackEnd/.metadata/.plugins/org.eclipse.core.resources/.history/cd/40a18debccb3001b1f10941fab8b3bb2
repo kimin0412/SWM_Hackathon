@@ -1,0 +1,35 @@
+package com.swmaestro.hackathon.swm14.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.swmaestro.hackathon.swm14.dto.Cctv;
+import com.swmaestro.hackathon.swm14.dto.Playlist;
+import com.swmaestro.hackathon.swm14.repository.ICctvRepository;
+import com.swmaestro.hackathon.swm14.repository.IPlaylistRepository;
+import com.swmaestro.hackathon.swm14.service.IPlaylistService;
+
+@Service
+public class CctvServiceImpl implements IPlaylistService{
+
+	@Autowired
+	private ICctvRepository cctvRepo;
+	
+	@Override
+	public List<Cctv> getAllPlaylists() {
+		return playlistRepo.findAllPlaylist();
+	}
+
+	@Override
+	public List<Cctv> getDayPlaylists(int day) {
+		return playlistRepo.findDayPlaylist(day);
+	}
+
+	@Override
+	public List<Cctv> getCategoryPlaylists(int day, int category) {
+		return playlistRepo.findCategoryPlaylist(day, category);
+	}
+
+}

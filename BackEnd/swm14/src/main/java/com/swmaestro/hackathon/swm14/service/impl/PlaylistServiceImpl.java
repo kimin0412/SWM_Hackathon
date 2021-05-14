@@ -1,0 +1,33 @@
+package com.swmaestro.hackathon.swm14.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.swmaestro.hackathon.swm14.dto.Playlist;
+import com.swmaestro.hackathon.swm14.repository.IPlaylistRepository;
+import com.swmaestro.hackathon.swm14.service.IPlaylistService;
+
+@Service
+public class PlaylistServiceImpl implements IPlaylistService{
+
+	@Autowired
+	private IPlaylistRepository playlistRepo;
+	
+	@Override
+	public List<Playlist> getAllPlaylists() {
+		return playlistRepo.findAllPlaylist();
+	}
+
+	@Override
+	public List<Playlist> getDayPlaylists(int day) {
+		return playlistRepo.findDayPlaylist(day);
+	}
+
+	@Override
+	public List<Playlist> getCategoryPlaylists(int day, int category) {
+		return playlistRepo.findCategoryPlaylist(day, category);
+	}
+
+}

@@ -1,0 +1,65 @@
+package com.swmaestro.hackathon.swm14.service;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
+
+import com.swmaestro.hackathon.swm14.dto.KmaDto;
+import com.swmaestro.hackathon.swm14.dto.KmaListDto;
+
+@Service
+public class KmaService {
+
+	private static final String URL = "http://www.kma.go.kr/wid/queryDFSRSS.jsp";
+
+	public KmaListDto getKmaList(String zone) {
+
+		KmaListDto kmaListDto = new KmaListDto();
+
+		try {
+
+			Document doc = Jsoup.connect(URL).data("zone", zone).get();
+
+			String category = doc.select("category").text();
+			System.out.println(category);
+
+			List<KmaDto> kmaList = new ArrayList<KmaDto>();
+
+			Elements el = doc.select("data");
+			for (int i = 0; i < el.size(); i++) {
+				Element e = el.get(i);
+				String day = e.select("day").text();
+				if ("0".equals(day)) {
+					KmaDto kma = new KmaDto();
+					String hour = e.select("hour").text();
+					double temp = Double.parseDouble(e.select("temp").text());
+					int pty = Integer.parseInt(e.select("pty").text());
+					int pop = Integer.parseInt(e.select("pop").text());
+					String wfKor = e.select("wfKor").text();
+
+					kma.setHour(hour);
+					kma.setWfKor(wfKor);
+
+					kmaList.add(kma);
+
+					System.out.println(hour + " - " + wfKor);
+				}
+			}
+			// System.out.println(el.toString());
+
+			kmaListDto.setCategory(category);
+			kmaListDto.setKmaList(kmaList);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return kmaListDto;
+	}
+}

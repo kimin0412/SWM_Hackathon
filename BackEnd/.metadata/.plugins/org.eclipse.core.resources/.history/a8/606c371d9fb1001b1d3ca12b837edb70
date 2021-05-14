@@ -1,0 +1,31 @@
+package com.swmaestro.hackathon.swm14.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.swmaestro.hackathon.swm14.dto.Playlist;
+import com.swmaestro.hackathon.swm14.service.IPlaylistService;
+
+@Service
+public class PlaylistServiceImpl implements IPlaylistService{
+
+	@Override
+	public List<Playlist> getAllPlaylists() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Playlist> getDayPlaylists(int day) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Playlist> getCategoryPlaylists(int day, int category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
