@@ -7,7 +7,12 @@
 | [김민지](https://github.com/kimin0412) | [곽병곤](https://github.com/ntxq),[안민준](https://github.com/YMGYM), [최우영](https://github.com/wooong210) | [최준영](https://github.com/NorangBerry), [황희영](https://github.com/hehehwang) |
 
 
+<br>
 
+![image](https://user-images.githubusercontent.com/24457164/120931859-51d0e600-c72e-11eb-8ba8-e8f50a948afa.png)
+
+
+<br>
 
 
 ##  산책이 가고 싶지 않으신가요?
