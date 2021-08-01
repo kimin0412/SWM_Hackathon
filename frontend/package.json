@@ -8,7 +8,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
-    "antd": "^4.15.5",
+    "antd": "^4.16.6",
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "connected-react-router": "^6.9.1",
